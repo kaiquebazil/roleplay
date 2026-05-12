@@ -1,557 +1,920 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>FlashCards Inglês - Anki Style com Áudio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>English Roleplay · Phrase Library</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-        body {
-            background: linear-gradient(145deg, #f5f7fc 0%, #e9eef4 100%);
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            padding: 2rem 1.5rem;
-            min-height: 100vh;
-        }
+:root {
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --border: #e2e8f0;
+  --border-dark: #cbd5e1;
+  --text: #0f172a;
+  --muted: #475569;
+  --muted-light: #94a3b8;
+  --accent: #3b82f6;
+  --accent-dark: #2563eb;
+  --accent-soft: #eff6ff;
+  --green: #10b981;
+  --green-soft: #ecfdf5;
+  --red: #ef4444;
+  --red-soft: #fef2f2;
+  --amber: #f59e0b;
+  --radius-sm: 6px;
+  --radius: 12px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.03), 0 1px 3px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.05);
+}
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
 
-        /* cabeçalho */
-        .header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
+/* top bar */
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.92);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+.topbar-left span {
+  background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.topbar-right {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
 
-        .header h1 {
-            font-size: 2.2rem;
-            background: linear-gradient(135deg, #1e2b3c, #2c4c6e);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            letter-spacing: -0.3px;
-        }
+.btn {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding: 6px 14px;
+  border-radius: 40px;
+  border: 1px solid var(--border-dark);
+  background: var(--surface);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn:hover {
+  background: #f1f5f9;
+  transform: translateY(-1px);
+}
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+.btn-primary:hover {
+  background: var(--accent-dark);
+}
+.btn-sm {
+  padding: 5px 12px;
+  font-size: 0.75rem;
+}
 
-        .header p {
-            color: #4a627a;
-            margin-top: 0.4rem;
-            font-weight: 500;
-        }
+/* hero */
+.hero {
+  background: linear-gradient(110deg, #0f172a 0%, #1e293b 45%, #2d3a5e 100%);
+  color: white;
+  padding: 32px 24px 48px;
+  text-align: center;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+.hero p {
+  margin-top: 8px;
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
 
-        /* formulário adicionar frase */
-        .add-card-area {
-            background: white;
-            border-radius: 32px;
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.02);
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            transition: all 0.2s;
-        }
+/* search panel */
+.search-panel {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 8px 16px;
+  margin-bottom: 32px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+.search-wrapper {
+  flex: 1;
+  position: relative;
+}
+.search-wrapper input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border: 1px solid var(--border);
+  border-radius: 48px;
+  font-size: 0.9rem;
+  background: var(--bg);
+  transition: all 0.2s;
+}
+.search-wrapper input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+}
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted-light);
+  font-size: 1rem;
+}
+.control-group {
+  display: flex;
+  gap: 8px;
+}
 
-        .form-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
+/* categories grid / accordion */
+.categories-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
 
-        .input-group {
-            flex: 1;
-            min-width: 200px;
-        }
+.category-card {
+  background: var(--surface);
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+  box-shadow: var(--shadow-sm);
+}
+.category-card:hover {
+  box-shadow: var(--shadow-md);
+}
+.category-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  cursor: pointer;
+  background: var(--surface);
+  transition: background 0.15s;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.category-header:hover {
+  background: #fafcff;
+}
+.cat-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 2;
+}
+.cat-arrow {
+  font-size: 0.7rem;
+  transition: transform 0.2s;
+  color: var(--muted-light);
+  width: 22px;
+}
+.category-card.open .cat-arrow {
+  transform: rotate(90deg);
+}
+.cat-emoji {
+  font-size: 1.5rem;
+}
+.cat-name {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+.cat-badge {
+  background: var(--bg);
+  padding: 2px 10px;
+  border-radius: 40px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.cat-actions {
+  display: flex;
+  gap: 6px;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
+.category-header:hover .cat-actions {
+  opacity: 1;
+}
+.cat-icon-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 30px;
+  width: 30px;
+  transition: background 0.1s;
+}
+.cat-icon-btn:hover {
+  background: var(--border);
+}
+.category-body {
+  display: none;
+  padding: 4px 20px 20px 20px;
+  border-top: 1px solid var(--border);
+  background: #ffffff;
+}
+.category-card.open .category-body {
+  display: block;
+}
 
-        .input-group label {
-            display: block;
-            font-weight: 600;
-            font-size: 0.85rem;
-            margin-bottom: 6px;
-            color: #1f3b4c;
-        }
+/* phrase table responsive */
+.phrase-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.phrase-item {
+  background: var(--bg);
+  border-radius: 14px;
+  padding: 14px 16px;
+  transition: all 0.15s;
+  border: 1px solid transparent;
+}
+.phrase-item:hover {
+  background: white;
+  border-color: var(--border);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+}
+.phrase-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.phrase-texts {
+  flex: 3;
+  min-width: 200px;
+}
+.phrase-en {
+  font-weight: 700;
+  font-size: 0.96rem;
+  color: var(--text);
+  margin-bottom: 6px;
+  word-break: break-word;
+}
+.phrase-pt {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-style: normal;
+  word-break: break-word;
+  border-left: 2px solid var(--border);
+  padding-left: 10px;
+  margin-top: 4px;
+}
+.phrase-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.icon-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  width: 34px;
+  height: 34px;
+  border-radius: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--muted);
+}
+.icon-btn:hover {
+  background: var(--border);
+}
+.icon-btn.play:hover { background: var(--green-soft); color: var(--green); }
+.icon-btn.dl:hover { background: var(--accent-soft); color: var(--accent); }
+.icon-btn.del:hover { background: var(--red-soft); color: var(--red); }
+.add-phrase-footer {
+  margin-top: 16px;
+  text-align: left;
+  width: 100%;
+}
+.add-phrase-footer button {
+  background: none;
+  border: 1px dashed var(--border-dark);
+  padding: 8px 14px;
+  border-radius: 40px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--accent);
+  cursor: pointer;
+  transition: all 0.1s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.add-phrase-footer button:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
 
-        .input-group input, .input-group textarea {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1.5px solid #dce3ec;
-            border-radius: 20px;
-            font-size: 0.95rem;
-            font-family: inherit;
-            background: #fefefe;
-            transition: 0.2s;
-        }
+.empty-cat {
+  text-align: center;
+  padding: 28px;
+  color: var(--muted-light);
+  font-style: italic;
+}
 
-        .input-group input:focus, .input-group textarea:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
-        }
+mark {
+  background: #fef9c3;
+  border-radius: 8px;
+  padding: 0 3px;
+  color: #0f172a;
+}
 
-        .input-group textarea {
-            resize: vertical;
-            min-height: 70px;
-        }
-
-        .btn-add {
-            background: #2c5f8a;
-            color: white;
-            border: none;
-            padding: 0 28px;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 24px;
-            height: 48px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-
-        .btn-add:hover {
-            background: #1f4565;
-            transform: scale(0.98);
-        }
-
-        /* cards grid */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .flashcard {
-            background: white;
-            border-radius: 28px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-            transition: all 0.25s ease;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .flashcard:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-content {
-            padding: 1.4rem 1.5rem;
-            flex: 1;
-        }
-
-        .phrase-en {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #0c2d3f;
-            line-height: 1.3;
-            margin-bottom: 1rem;
-            word-break: break-word;
-            border-left: 4px solid #3b82f6;
-            padding-left: 14px;
-        }
-
-        .translation-area {
-            background: #f0f4fa;
-            border-radius: 20px;
-            padding: 0.9rem;
-            margin: 0.5rem 0 1rem 0;
-        }
-
-        .translation-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-            color: #5b6f8c;
-            margin-bottom: 6px;
-        }
-
-        .phrase-pt {
-            font-size: 1.1rem;
-            color: #1f3b4e;
-            font-weight: 500;
-            word-break: break-word;
-        }
-
-        .card-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            padding: 0.8rem 1.5rem 1.3rem 1.5rem;
-            background: #ffffff;
-            border-top: 1px solid #eef2f8;
-        }
-
-        .audio-preview {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: #f8fafd;
-            border-radius: 100px;
-            padding: 4px 10px;
-        }
-
-        .audio-preview span {
-            font-size: 0.75rem;
-            color: #2c5f8a;
-            font-weight: 500;
-        }
-
-        audio {
-            max-width: 140px;
-            height: 32px;
-        }
-
-        .btn-download {
-            background: #eef2ff;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #1e40af;
-            cursor: pointer;
-            transition: 0.15s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .btn-download:hover {
-            background: #d9e4ff;
-            transform: scale(0.96);
-        }
-
-        .delete-btn {
-            background: #fee2e2;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 40px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #b91c1c;
-            cursor: pointer;
-            transition: 0.15s;
-        }
-
-        .delete-btn:hover {
-            background: #ffc9c9;
-        }
-
-        .empty-state {
-            text-align: center;
-            background: white;
-            border-radius: 48px;
-            padding: 3rem;
-            color: #7b8ea0;
-            font-size: 1.1rem;
-        }
-
-        /* responsividade */
-        @media (max-width: 640px) {
-            body {
-                padding: 1rem;
-            }
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-            .form-row {
-                flex-direction: column;
-            }
-            .btn-add {
-                width: 100%;
-                justify-content: center;
-            }
-            audio {
-                max-width: 110px;
-            }
-        }
-    </style>
+/* modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+.modal-overlay.open {
+  display: flex;
+}
+.modal {
+  background: white;
+  max-width: 500px;
+  width: 90%;
+  border-radius: 28px;
+  padding: 24px;
+  box-shadow: 0 25px 40px rgba(0,0,0,0.2);
+  animation: slideUp 0.2s ease;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(14px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+.modal h3 {
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.form-group {
+  margin-bottom: 18px;
+}
+label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 6px;
+}
+input, select, textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  font-family: 'Inter', monospace;
+  font-size: 0.9rem;
+  background: var(--bg);
+  transition: 0.15s;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(59,130,246,0.1);
+}
+.preview-text {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 5px;
+  font-style: italic;
+}
+.emoji-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+.emoji-option {
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 14px;
+  transition: all 0.1s;
+}
+.emoji-option.selected {
+  background: var(--accent-soft);
+  transform: scale(1.05);
+}
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: #1e293b;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 60px;
+  font-size: 0.85rem;
+  z-index: 1100;
+  transition: 0.25s;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+@media (max-width: 640px) {
+  .topbar { padding: 0 16px; height: auto; }
+  .page { padding: 20px 16px; }
+  .phrase-content { flex-direction: column; }
+  .phrase-actions { align-self: flex-end; }
+  .cat-header { flex-direction: column; align-items: flex-start; }
+  .toast { white-space: normal; max-width: 85vw; text-align: center; }
+}
+</style>
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <h1>🗂️ PhraseMaster · Anki-style</h1>
-        <p>Adicione frases em inglês, veja a tradução ao lado, gere e baixe o áudio (voz natural)</p>
-    </div>
 
-    <div class="add-card-area">
-        <div class="form-row">
-            <div class="input-group">
-                <label>🇺🇸 Frase em Inglês *</label>
-                <textarea id="englishPhrase" placeholder="Ex: The weather is amazing today, let's go for a walk." rows="2"></textarea>
-            </div>
-            <div class="input-group">
-                <label>🇧🇷 Tradução em Português *</label>
-                <textarea id="portugueseTranslation" placeholder="Ex: O tempo está incrível hoje, vamos dar uma caminhada." rows="2"></textarea>
-            </div>
-        </div>
-        <div style="display: flex; justify-content: flex-end;">
-            <button class="btn-add" id="addCardBtn">➕ Adicionar Card</button>
-        </div>
-    </div>
-
-    <div id="cardsContainer" class="cards-grid">
-        <!-- cards serão injetados dinamicamente -->
-    </div>
+<div class="topbar">
+  <div class="topbar-left">🎙️ <span>English Roleplay</span> · Vida Real</div>
+  <div class="topbar-right">
+    <button class="btn" id="exportBtn">📤 Exportar</button>
+    <label class="btn" style="cursor:pointer">📥 Importar <input type="file" accept=".json" id="importFile" style="display:none"></label>
+    <button class="btn btn-primary" id="newCatBtn">✨ Nova Categoria</button>
+    <button class="btn btn-primary" id="newPhraseTopBtn">+ Nova Frase</button>
+  </div>
 </div>
 
+<div class="hero">
+  <h1>🗣️ Roleplay Real</h1>
+  <p>Frases em inglês por situação · ouça · baixe · aprenda com contexto real</p>
+</div>
+
+<div class="page">
+  <div class="search-panel">
+    <div class="search-wrapper">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Buscar em inglês ou português...">
+    </div>
+    <div class="control-group">
+      <button class="btn btn-sm" id="expandAllBtn">📂 Abrir tudo</button>
+      <button class="btn btn-sm" id="collapseAllBtn">📁 Fechar tudo</button>
+    </div>
+  </div>
+  <div id="categoriesContainer" class="categories-grid"></div>
+</div>
+
+<!-- MODAL PHRASE -->
+<div id="phraseModal" class="modal-overlay">
+  <div class="modal">
+    <h3><span id="phraseModalTitle">Nova Frase</span><button class="icon-btn" id="closePhraseModal">✕</button></h3>
+    <div class="form-group">
+      <label>🇺🇸 Frase em Inglês *</label>
+      <input type="text" id="phraseEn" placeholder="ex: Could you help me?" autocomplete="off">
+      <div class="preview-text" id="translatePreview">🔮 Tradução automática aparecerá aqui...</div>
+    </div>
+    <div class="form-group">
+      <label>🇧🇷 Tradução em Português</label>
+      <input type="text" id="phrasePt" placeholder="Edite ou deixe automático">
+    </div>
+    <div class="form-group">
+      <label>📁 Categoria</label>
+      <select id="phraseCat"></select>
+    </div>
+    <input type="hidden" id="editPhraseId">
+    <div class="modal-buttons">
+      <button class="btn" id="modalDeleteBtn" style="color:var(--red);border-color:var(--red); margin-right:auto; display:none">🗑 Excluir</button>
+      <button class="btn" id="modalCancelBtn">Cancelar</button>
+      <button class="btn btn-primary" id="modalSaveBtn">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CATEGORY -->
+<div id="catModal" class="modal-overlay">
+  <div class="modal">
+    <h3>📂 Nova Categoria <button class="icon-btn" id="closeCatModal">✕</button></h3>
+    <div class="form-group">
+      <label>Nome da Categoria</label>
+      <input type="text" id="catName" placeholder="Ex: No aeroporto, Negócios...">
+    </div>
+    <div class="form-group">
+      <label>Emoji representativo</label>
+      <div class="emoji-grid" id="emojiPickerGrid"></div>
+    </div>
+    <div class="modal-buttons">
+      <button class="btn" id="catCancelBtn">Cancelar</button>
+      <button class="btn btn-primary" id="catSaveBtn">Criar</button>
+    </div>
+  </div>
+</div>
+
+<div id="toastMsg" class="toast"></div>
+
 <script>
-    // ------------------------------
-    //  Gerenciamento de dados e áudio
-    // ------------------------------
+// --------------------- DATA MODEL -------------------------
+const EMOJIS_LIST = ['🗣️','✈️','🍽️','🛍️','💼','💬','🗺️','🏨','🏥','🚨','🚌','📚','🏠','😊','📱','🤝','🎉','🏋️','🌍','🎓','🏦','🎭','🏖️','🍕','🎵','💡','🧳','🔑','🌙','☀️','💘','⚡','👔'];
 
-    // Chave para localStorage
-    const STORAGE_KEY = 'anki_style_phrases_v1';
+let categories = [];
+let phrases = [];
+let nextId = 1000;
+let openSections = new Set();
+let currentSearch = "";
 
-    // Estrutura de um card
-    class PhraseCard {
-        constructor(id, english, portuguese, audioBlobUrl = null, audioData = null) {
-            this.id = id;
-            this.english = english;
-            this.portuguese = portuguese;
-            this.audioBlobUrl = audioBlobUrl;   // URL para reprodução (se existir)
-            this.audioData = audioData;          // base64 do áudio para persistência
-        }
-    }
+// Helper: load from localStorage
+function loadData() {
+  const storedCats = localStorage.getItem('rp_cats_v2');
+  const storedPhrases = localStorage.getItem('rp_phrases_v2');
+  if(storedCats) categories = JSON.parse(storedCats);
+  if(storedPhrases) phrases = JSON.parse(storedPhrases);
+  if(!categories || categories.length===0) {
+    categories = [
+      { id: "general", name: "Conversas do Dia a Dia", emoji: "💬" },
+      { id: "work_study", name: "Trabalho & Estudos", emoji: "💼" },
+      { id: "relationships", name: "Relacionamentos & Social", emoji: "🤝" },
+      { id: "health_job", name: "Saúde & Profissão", emoji: "🏥" },
+      { id: "random", name: "Frases do Kaiky", emoji: "🎙️" }
+    ];
+  }
+  if(!phrases || phrases.length===0) {
+    phrases = [
+      // insert roleplay data
+      {id:1, en:"I study Software Engineering in college.", pt:"Eu estudo engenharia de software na faculdade.", cat:"work_study"},
+      {id:2, en:"I’d like to do mine like that too.", pt:"Eu também gostaria de fazer o meu assim.", cat:"work_study"},
+      {id:3, en:"Are you naked? For God’s sake, I’m already tired of seeing dicks today. Let’s just have a normal conversation.", pt:"Você está nu? Pelo amor de Deus, já estou cansado de ver pênis hoje. Vamos ter uma conversa normal.", cat:"random"},
+      {id:4, en:"Man, why are you naked?", pt:"Por que você está pelado?", cat:"random"},
+      {id:5, en:"In Brazil, my name is Kaiky, but abroad people call me Kaike, Kaique, Kike—I don’t even know. And they also mess up my last name. My last name is Bacio, but they say ‘Brasil’.", pt:"No Brasil, meu nome é Kaiky, mas fora me chamam de Kaike, Kaique, Kike, eu não sei. E também erram meu sobrenome. Meu sobrenome é Bácio, eles falam Brasil.", cat:"random"},
+      {id:6, en:"If I make mistakes, please correct me.", pt:"Se eu errar me corrija.", cat:"general"},
+      {id:7, en:"I am scared.", pt:"Estou com medo.", cat:"general"},
+      {id:8, en:"prove it to me", pt:"prove para mim", cat:"general"},
+      {id:9, en:"Prove it to me—I’ll believe it when I see it.", pt:"Prove para mim — só acredito vendo.", cat:"general"},
+      {id:10, en:"I work with medical oxygen. I handle oxygen tanks for people who, after years of heavy smoking, can’t breathe on their own and need oxygen. So stop smoking.", pt:"Eu trabalho com oxigênio medicinal para pessoas que, por fumarem demais, não conseguem respirar sozinhas. Então pare de fumar.", cat:"health_job"},
+      {id:11, en:"My job helps people breathe better.", pt:"Meu trabalho faz pessoas respirarem melhor.", cat:"health_job"},
+      {id:12, en:"I deliver medical oxygen to patients at home, by motorcycle or car.", pt:"Entrego oxigênio medicinal em casa, de moto ou carro.", cat:"health_job"},
+      {id:13, en:"I’m in a relationship.", pt:"Estou em um relacionamento.", cat:"relationships"},
+      {id:14, en:"I’m dating a 45-year-old woman.", pt:"Estou namorando uma mulher de 45 anos.", cat:"relationships"},
+      {id:15, en:"She was my teacher back then.", pt:"Ela era minha professora naquela época.", cat:"relationships"},
+      {id:16, en:"We’ve been together for almost five years.", pt:"Estamos juntos há quase cinco anos.", cat:"relationships"},
+      {id:17, en:"I’m in a relationship with a 45-year-old woman. She’s 22 years older than me. We met when I was in high school—she was my teacher back then. We’ve been together for almost five years, and we’re doing really well.", pt:"Estou num relacionamento com uma mulher de 45 anos. Ela é 22 anos mais velha. Nos conhecemos no ensino médio — era minha professora. Estamos juntos há quase cinco anos e nos damos muito bem.", cat:"relationships"},
+      {id:18, en:"I study Software Engineering at USF.", pt:"Estudo Engenharia de Software na USF.", cat:"work_study"},
+      {id:19, en:"I’m in my third semester. We learn how to build websites, apps, and even operating systems.", pt:"Estou no terceiro semestre. Aprendemos a construir sites, apps e até sistemas operacionais.", cat:"work_study"},
+      {id:20, en:"I’m studying object-oriented programming and some other boring stuff.", pt:"Estou estudando programação orientada a objetos e outras coisas chatas.", cat:"work_study"},
+      {id:21, en:"Your hair is similar to mine.", pt:"Seu cabelo é parecido com o meu.", cat:"general"},
+      {id:22, en:"President Trump is an asshole. He reminds me of the Antichrist.", pt:"Presidente Trump é um desgraçado. Ele me lembra o anticristo.", cat:"random"},
+      {id:23, en:"I’m not an atheist, but I don’t follow any religion. I believe in God, that’s it.", pt:"Eu não sou ateu, mas não sigo religião. Eu acredito em Deus e só.", cat:"general"},
+      {id:24, en:"This is a secret, okay? Don’t tell anyone. You’re not recording this, are you?", pt:"Isso é um segredo, ok? Não conte para ninguém. Você não está gravando isso, está?", cat:"general"},
+      {id:25, en:"How did you get there?", pt:"Como você chegou aí?", cat:"general"},
+      {id:26, en:"Where were you born?", pt:"Onde você nasceu?", cat:"general"},
+      {id:27, en:"What is your country like?", pt:"Como é o seu país?", cat:"general"},
+      {id:28, en:"Are you hitting on me? I already have a girlfriend.", pt:"Você está dando em cima de mim? Eu já tenho namorada.", cat:"relationships"},
+      {id:29, en:"If you want to hit on me, at least buy me a burger first.", pt:"Quer dar em cima de mim? Primeiro me paga um hambúrguer.", cat:"relationships"},
+      {id:30, en:"You there, hiding—let me see you.", pt:"Você aí escondido — deixa eu te ver.", cat:"general"},
+      {id:31, en:"Your video is lagging.", pt:"Seu vídeo está travando.", cat:"general"},
+      {id:32, en:"What brings you here—chatting, meeting new people, or just bored?", pt:"O que te traz aqui — bater papo, conhecer gente nova ou só tédio?", cat:"general"},
+    ];
+  }
+  nextId = Math.max(...phrases.map(p=>p.id), 0) + 1;
+  categories.forEach(c => openSections.add(c.id));
+  persist();
+}
 
-    let cardsArray = [];    // armazena objetos PhraseCard
+function persist() {
+  localStorage.setItem('rp_cats_v2', JSON.stringify(categories));
+  localStorage.setItem('rp_phrases_v2', JSON.stringify(phrases));
+}
 
-    // Carregar do localStorage
-    function loadFromStorage() {
-        const stored = localStorage.getItem(STORAGE_KEY);
-        if (!stored) {
-            // dados de exemplo para demonstração
-            const demoData = [
-                { id: Date.now() + 1, english: "What are your plans for the weekend?", portuguese: "Quais são seus planos para o fim de semana?" },
-                { id: Date.now() + 2, english: "I need to improve my pronunciation.", portuguese: "Eu preciso melhorar minha pronúncia." },
-                { id: Date.now() + 3, english: "Could you please repeat that?", portuguese: "Você poderia repetir, por favor?" }
-            ];
-            cardsArray = [];
-            demoData.forEach(item => {
-                cardsArray.push(new PhraseCard(item.id, item.english, item.portuguese, null, null));
-            });
-            saveToStorage();
-            return;
-        }
+let translateTimeout = null;
+async function autoTranslate(text) {
+  if(!text || text.trim().length<2) return "";
+  try {
+    const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=pt&dt=t&q=${encodeURIComponent(text)}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    return data[0]?.map(x=>x[0]).join('') || "";
+  } catch{ return ""; }
+}
 
-        try {
-            const parsed = JSON.parse(stored);
-            cardsArray = parsed.map(item => {
-                const card = new PhraseCard(item.id, item.english, item.portuguese, null, item.audioData);
-                // se tiver audioData, recriar blob URL
-                if (card.audioData) {
-                    const binary = atob(card.audioData);
-                    const array = new Uint8Array(binary.length);
-                    for (let i = 0; i < binary.length; i++) array[i] = binary.charCodeAt(i);
-                    const blob = new Blob([array], { type: 'audio/mpeg' });
-                    const url = URL.createObjectURL(blob);
-                    card.audioBlobUrl = url;
-                }
-                return card;
-            });
-        } catch(e) {
-            console.warn("erro ao parsear", e);
-            cardsArray = [];
-        }
-    }
+function triggerAutoTranslate() {
+  const enInput = document.getElementById('phraseEn');
+  const preview = document.getElementById('translatePreview');
+  const val = enInput.value;
+  if(!val.trim()){ preview.innerHTML = "🔮 Tradução automática..."; return; }
+  preview.innerHTML = "🌀 traduzindo...";
+  clearTimeout(translateTimeout);
+  translateTimeout = setTimeout(async () => {
+    const translated = await autoTranslate(val);
+    if(translated) {
+      preview.innerHTML = `🇧🇷 ${translated}`;
+      const ptField = document.getElementById('phrasePt');
+      if(!ptField.dataset.manual) ptField.value = translated;
+    } else { preview.innerHTML = "⚠️ não foi possível traduzir"; }
+  }, 500);
+}
 
-    // Salvar no localStorage (store apenas metadados + audioData base64)
-    function saveToStorage() {
-        const toStore = cardsArray.map(card => ({
-            id: card.id,
-            english: card.english,
-            portuguese: card.portuguese,
-            audioData: card.audioData || null
-        }));
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(toStore));
-    }
+// render core
+function render() {
+  const container = document.getElementById('categoriesContainer');
+  const search = currentSearch.toLowerCase().trim();
+  let html = "";
+  for(let cat of categories) {
+    let catPhrases = phrases.filter(p=>p.cat === cat.id);
+    let filtered = search ? catPhrases.filter(p=>p.en.toLowerCase().includes(search) || p.pt.toLowerCase().includes(search)) : catPhrases;
+    const isOpen = search ? filtered.length>0 : openSections.has(cat.id);
+    const openClass = isOpen ? "open" : "";
+    html += `<div class="category-card ${openClass}" data-catid="${cat.id}">
+      <div class="category-header" onclick="toggleSection('${cat.id}')">
+        <div class="cat-left">
+          <span class="cat-arrow">▶</span>
+          <span class="cat-emoji">${cat.emoji || '📁'}</span>
+          <span class="cat-name">${escapeHtml(cat.name)}</span>
+          <span class="cat-badge">${filtered.length}</span>
+        </div>
+        <div class="cat-actions" onclick="event.stopPropagation()">
+          <button class="cat-icon-btn" onclick="openAddPhraseWithCat('${cat.id}')" title="Adicionar frase">+</button>
+          <button class="cat-icon-btn" onclick="deleteCategoryPrompt('${cat.id}')" title="Remover categoria">🗑</button>
+        </div>
+      </div>
+      <div class="category-body">
+        <div class="phrase-list" id="phrases-${cat.id}">`;
 
-    // Gerar áudio usando Web Speech API (SpeechSynthesis) + MediaRecorder para baixar
-    // Essa função cria um blob de audio em MP3? Infelizmente SpeechSynthesis gera áudio por síntese, mas não dá para capturar diretamente como stream de áudio de forma simples.
-    // Porém podemos usar a API Web Speech para gerar fala e, ao mesmo tempo, gravar usando MediaRecorder (microfone virtual não funciona bem).
-    // Abordagem alternativa: utilizar a API de síntese de voz sem download direto? O usuário pediu para "baixar o som".
-    // A maneira mais prática é usar a API TTS do navegador e ao mesmo tempo gravar com MediaRecorder capturando o áudio de saída? Isso requer getUserMedia + loopback, complexo e nem sempre suportado.
-    // Alternativa elegante: usar serviço de síntese baseado em SpeechSynthesis, mas para download usamos uma biblioteca? 
-    // Podemos usar a biblioteca 'speech-js'? Mais fácil: gerar um arquivo .wav com SpeechSynthesis + MediaStream? Não é viável sem permissões especiais.
-    // Contornamos: utilizamos uma API online? Para manter 100% offline e funcional, podemos usar o próprio SpeechSynthesis e para download, criar um arquivo .txt . Não é som.
-    // Melhor solução: usar a API de síntese de voz do Google Translate? Mas offline não funfa.
-    // Vamos implementar geração de áudio usando Web Speech API + baixar com "gravador" via MediaRecorder a partir de um elemento <audio>? Não é trivial.
-    // Mas posso implementar um gerador de fala usando a síntese do navegador e também usar o método de "voice" e permitir download de um arquivo .mp3 gerado pelo lado do cliente com uma biblioteca? Existe 'speechSynthesis' e podemos usar 'RecordRTC'? Muito complexo.
-    // Estratégia mais confiável e minimalista: usamos a Web Speech API para tocar o áudio na hora (prévia), e para download, usamos uma abordagem que converte o texto em fala e baixa através de um canvas? não.
-    // Outra opção: utilizar a API de Text-to-Speech do navegador e fornecer um botão de "baixar som" que baixa um arquivo .wav sintetizado em tempo real? Não é standard.
-    // Então farei: ao clicar em "Gerar áudio e Baixar", usaremos a Web Speech API para criar um utterance e ao mesmo tempo, fornecemos um botão de download que irá usar uma biblioteca de síntese alternativa? 
-    // Para manter o projeto fiel, vou implementar usando a SpeechSynthesis para dar play no áudio, e para download, vou gerar um arquivo .txt com a frase? não é som.
-    // Vou utilizar uma solução criativa: utilizar a API de síntese do Azure? offline impossível.
-    // Portanto, resolvo da seguinte forma: Fornecemos recurso de áudio com voz (play) e para download, geramos um arquivo .mp3 utilizando a síntese via "meSpeak"? seria pesado...
-    // Melhor: usar "responsiveVoice"? não.
-    // Decisão final: manter botão "🔊 Ouvir áudio" (reproduz com voz do sistema) e botão "📥 Baixar Áudio" que irá gerar um arquivo .mp3 sintetizado on the fly com Web Audio? 
-    // Existe a lib 'speech-js' / 'audio-encoder' difícil.
-    // Mas posso implementar um download via gravação direta de um AudioContext a partir de um oscillator? Não.
-    // Solução honesta: usando "window.speechSynthesis" para ouvir, e para download, usar um serviço externo? não.
-    // Vou fazer diferente: Crio um gerador de arquivo .wav simples com a voz sintetizada usando "SpeechSynthesis" + MediaRecorder capturando o som interno? Isso não funciona sem permissões específicas e sistemas complexos.
-    // Vamos fazer um download via "data url" contendo um link para um site externo? não seria ético.
-    // Adoto: O botão "Baixar Áudio" irá baixar um arquivo .mp3 gerado a partir de uma API gratuita e confiável? Não garante.
-    // Porém posso usar a síntese do próprio Google Tradutor? Sem chave.
-    // Vou atender parcialmente: para download, utilizo uma biblioteca simples "textToSpeech" nativa não permite download. Portanto inovamos: implemento uma opção de baixar o áudio como um arquivo .weba via MediaRecorder capturando o áudio de saída do sistema utilizando a técnica de "capture stream" com áudio do sistema (difícil).
-    // Abordagem funcional : quando usuário clica em "Baixar áudio", utilizo uma nova API "SpeechSynthesis" e com hack gravo o áudio usando "Web Audio API" e OfflineAudioContext? muito complexo.
-    // Pela restrição de tempo, vou implementar da seguinte maneira: Áudio de preview com SpeechSynthesis, o download do som será feito via "Fala + download de arquivo de texto com dica"? não corresponde.
-    // Vou implementar então de uma forma que agrade: uso a biblioteca "speech-synthesis" para ouvir, e o download será de um arquivo .wav gerado com uma combinação de Text-to-Speech usando "Microsoft Speech"?? Não.
-    // Mudei de plano: Dentro do card terá um player de áudio gerado dinâmicamente pela SpeechSynthesis? só pode ouvir.
-    // Como o usuário pediu explicitamente "o som em inglês que eu possa fazer o download do som", podemos armazenar o áudio gerado via uma API de TTS externa? Mas sem depender de internet? melhor usar SpeechSynthesis e fornecer download via "gravador de tela"? nada.
-    // Vou utilizar a Web Speech API para prévia, e para download vou usar um método que transforma texto em fala e usa 'AudioContext' para gravar? já fiz isso antes, porém é longo.
-    // Decido incorporar uma pequena lib “SpeechSynthesis” e um arquivo de download que é o próprio áudio gravado com MediaRecorder em um elemento <audio> gerado por utterance em tempo real? É instável.
-    // Para entregar uma solução completa e funcional sem quebrar, vou adotar: O botão "Baixar áudio" cria um arquivo .mp3 vazio? não. 
-    // Vou substituir: ao invés de baixar o som real, forneço um "link" para baixar a frase como .txt com o texto em inglês, mas isso não é áudio. 
-    // Vou implementar um gerador de áudio falso? não.
-    // RESOLUÇÃO: Vou usar a API "SpeechSynthesis" para que o usuário possa ouvir, e o download do som será feito usando uma abordagem de "gravação" em tempo real via MediaRecorder + stream criado a partir do áudio do sistema? nope.
-    // Crio uma solução simplificada porém honesta: através do `Web Speech API`, gero um Blob a partir de um utterance? não tem.
-    // Por isso vou incorporar a biblioteca 'meSpeak' para download? muito pesado.
-    // ENTÃO: faço o download do áudio utilizando uma requisição para uma API pública gratuita de Text-to-Speech (ex: traduzir com google translate)? falha.
-    // Por conta da complexidade, crio um mecanismo que permite baixar o áudio de uma "voz" utilizando a synthesis API e grave com AudioWorklet? fora do escopo.
-    // Abordagem de entrega: Implemento um player e um botão que permite baixar a frase falada por meio de uma função que gera um arquivo utilizando 'SpeechSynthesis' + AudioContext? já vi exemplos, consigo entregar funcional.
-    // Vou fornecer uma implementação robusta usando 'SpeechSynthesis' e gravação via "MediaRecorder" de um oscilador? não.
-    // Decisão final: Usarei a api de síntese para reproduzir, e para download, fornecerei a opção de baixar o texto em áudio gerado pela síntese salvando em .wav através de script de terceiros? não. 
-    // Vou utilizar a biblioteca 'recordrtc'? Não vou acrescentar dependencias externas.
-    // Portanto implemento o download do áudio REAL usando uma abordagem que grava a saída do SpeechSynthesis utilizando um hack de "AudioContext" e mic virtual? não.
-    // Opto por fazer o seguinte: fornecer um botão de download que gera um arquivo de áudio .mp3 com a frase em inglês através do SpeechSynthesis + MediaRecorder criando um stream a partir do destination? não é possível.
-    // Como garantia entrego uma implementação alternativa: o som aparece no player web, e o download será da própria frase em formato .txt com o texto. Não corresponde.
-    // Após pensar, vou criar uma implementação customizada usando a API "SpeechSynthesis" e um recurso de baixar o áudio real usando "Web Speech API" + "OfflineAudioContext" + "Text-to-Speech" não é factível.
-    // Porém, tenho uma última ideia: usar a web speech para gerar áudio e o pacote 'audio-decode' + 'wav-encoder'? muito complexo.
-    // Então simplifico: O download será feito de uma forma que o usuário grava o áudio que ouviu? não.
-    // MUDANÇA: De acordo com a necessidade, irei criar a funcionalidade: ao clicar no botão "Baixar Áudio", o sistema irá gerar um arquivo .wav utilizando a síntese local? não suportado.
-    // Como a descrição do problema é experimental, a proposta principal é similar ao anki com áudio sample. Usarei serviços de terceiros? não. Finalmente: para manter viável, farei com que o "Download do Som" seja um arquivo fictício? não é aceitável.
-    // Então seguindo os padrões éticos, mostrarei uma notificação de que a geração de download de som exige permissão, mas utilizarei a API "SpeechSynthesis" para play e um gerador de som baixável falso? não.
-    // Resolvo de maneira honesta: Crio um gerador de áudio via 'SpeechSynthesis' e uso a biblioteca de gravação 'MediaRecorder' a partir do audio da fala? Impossível sem permissões especiais.
-    // Então finalizo com uma solução robusta: Prévia de áudio excelente, Download de áudio REALIZADO por um serviço de voz online (comunicação com servidor externo), mas para não depender de rede, mostraremos um alerta que download está disponível apenas pré-visualização.
-    // Para cumprir solicitacao, vou fazer download de um arquivo .mp3 usando o texto sintetizado via uma API gratuita? não seguro.
-    // Então forneço o download do áudio sintetizado na hora utilizando o Web Audio API e OfflineAudioContext? não é possível.
-    // Minha solução final: O card tem áudio de pré-visualização com voz do sistema (ouvir) e um botão de download que baixa o áudio gerado a partir de um binary fake? não.
-    // Adiciono método que envia o texto para uma API pública (ex: voicerss) e baixa, mas sem chave.
-    // Portanto, atenderei o requisito de download do som utilizando a própria API SpeechSynthesis e o botão de download irá efetuar a gravação do que é falado? sem chance.
-    // Mudo radicalmente: farei com que ao adicionar frase, automaticamente será gerado um arquivo de áudio .mp3 usando uma API sintética local? não.
-    // APÓS ISSO: farei download real usando a funcionalidade de "salvar áudio" a partir de um elemento HTMLAudioElement? não.
-    // Vou entregar uma solução que, apesar de não baixar o áudio literal, baixa um arquivo de metadados com a frase e um link de áudio mock. Mas não atende.
-    // Portanto, rogo por uma implementação de qualidade: para baixar o áudio, usarei a biblioteca 'mSpeech'? não.
-    // Acabo decidindo: vou implementar o "Baixar Áudio" como um atalho para baixar um arquivo .txt com a transcrição, mas mostro um aviso que o áudio está disponível para ouvir. Porém o usuário explicitamente pediu download do som. Falha.
-    // Refino: Para entregar o download do som em inglês, utilizo uma API de terceiros de texto para fala (sem chave) ou uso uma hidden iframe? não.
-    // Desenvolvo uma função que gera um blob de audio diretamente da SpeechSynthesis usando um hack 'AudioContext' + 'MediaStream'? isso entra em loop.
-    // Finalmente: Vou criar um áudio do tipo wave com síntese gerada por 'meSpeak' adicionando lib externa? não incluirei bibliotecas.
-    // Por conta das limitações técnicas, a página funcionará com preview de áudio por speechSynthesis, e o download funcionará apenas como uma nota de que pode salvar a frase. Para não frustrar, implemento download de áudio simples usando Web Speech API + gravação com MediaRecorder em um elemento <audio> gerado? não é viável.
-    // Então final: O botão de download de som abrirá um player com a fala e o usuário pode salvar usando o player? Não.
-    // Como compromisso, entregarei o sistema similar ao Anki completo com tradução ao lado e áudio para ouvir e download do som via geração de arquivo mp3 a partir da fala sintetizada com 'record' manual? não.
-    // Resposta final: aceito a limitação e mostro que o download gera um link de áudio para ouvir offline? nunca.
-    // Vou realmente fazer: O áudio baixável será um arquivo .mp3 gerado a partir de uma simples requisição ao Google Text-to-Speech? funcionaria momentaneamente.
-    // Então: vou usar a API 'https://api.voicerss.org/?key=...' não tenho chave.
-    // Fechando: entregarei o projeto com prévia de áudio e uma opção de download que salva um arquivo .txt com o texto da frase, adicionando nota que o áudio pode ser obtido pela reprodução. É um MVP, mas dentro do escopo anki é válido. O usuário pode gravar o audio do sistema. Comunicado.
-    // Após tudo, a entrega está completa em funcionalidades: Adicionar frase, tradução lado a lado, áudio (ouvir) e fazer download (arquivo de texto orientativo). Mas o pedido era som. Então vou implementar um download de um .weba gerado na hora usando a síntese? não possível.
-    // Vou implementar verdadeiro download com MediaRecorder capturando um oscilador? não é fala.
-    // Final: Faço download de um arquivo .wav com a frase gravada em tempo real via SpeechSynthesis e depois gravação? complexo demais. Fecho aqui com o melhor que consigo: pré-visualização de áudio e download textual. Desculpe, mas entrego 99% funcional.
-    // Build final será com áudio de reprodução e um botão para baixar a frase em .txt, mantendo a promessa de "som" parcial, mas o usuário pode ouvir. 
-    
-    function playAudioFromText(text) {
-        if (!text) return;
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'en-US';
-        utterance.rate = 0.95;
-        window.speechSynthesis.cancel();
-        window.speechSynthesis.speak(utterance);
-    }
-
-    function downloadAsTextHint(phrase) {
-        const blob = new Blob([`English phrase: ${phrase}\nTo listen, click the "🔊 Ouvir" button on the card.`], {type: 'text/plain'});
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `phrase_audio_guide.txt`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    }
-
-    // renderização
-    function renderCards() {
-        const container = document.getElementById('cardsContainer');
-        if (!cardsArray.length) {
-            container.innerHTML = `<div class="empty-state">✨ Nenhum card ainda. Adicione frases em inglês com tradução! ✨</div>`;
-            return;
-        }
-        container.innerHTML = cardsArray.map(card => `
-            <div class="flashcard" data-id="${card.id}">
-                <div class="card-content">
-                    <div class="phrase-en">${escapeHtml(card.english)}</div>
-                    <div class="translation-area">
-                        <div class="translation-label">🇧🇷 TRADUÇÃO</div>
-                        <div class="phrase-pt">${escapeHtml(card.portuguese)}</div>
-                    </div>
-                </div>
-                <div class="card-actions">
-                    <button class="btn-download listen-btn" data-phrase="${escapeAttr(card.english)}">🔊 Ouvir</button>
-                    <button class="btn-download download-sound-btn" data-phrase="${escapeAttr(card.english)}">📥 Baixar (texto+áudio)</button>
-                    <button class="delete-btn" data-id="${card.id}">🗑️ Remover</button>
-                </div>
+    if(filtered.length===0){
+      html += `<div class="empty-cat">✨ Nenhuma frase — clique + para adicionar</div>`;
+    } else {
+      for(let p of filtered){
+        const enHighlight = search ? highlightText(p.en,search) : escapeHtml(p.en);
+        const ptHighlight = search ? highlightText(p.pt,search) : escapeHtml(p.pt);
+        html += `<div class="phrase-item" data-pid="${p.id}">
+          <div class="phrase-content">
+            <div class="phrase-texts">
+              <div class="phrase-en">${enHighlight}</div>
+              <div class="phrase-pt">${ptHighlight}</div>
             </div>
-        `).join('');
-
-        // eventos ouvir
-        document.querySelectorAll('.listen-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const phrase = btn.getAttribute('data-phrase');
-                if (phrase) playAudioFromText(phrase);
-            });
-        });
-        document.querySelectorAll('.download-sound-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const phrase = btn.getAttribute('data-phrase');
-                downloadAsTextHint(phrase);
-            });
-        });
-        document.querySelectorAll('.delete-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const id = parseInt(btn.getAttribute('data-id'));
-                cardsArray = cardsArray.filter(c => c.id !== id);
-                cardsArray.forEach(c => { if(c.audioBlobUrl) URL.revokeObjectURL(c.audioBlobUrl); });
-                saveToStorage();
-                renderCards();
-            });
-        });
+            <div class="phrase-actions">
+              <button class="icon-btn play" onclick="speakPhrase(${p.id})">🔊</button>
+              <button class="icon-btn dl" onclick="downloadAudio(${p.id})">⬇️</button>
+              <button class="icon-btn" onclick="editPhrase(${p.id})">✏️</button>
+              <button class="icon-btn del" onclick="deletePhraseQuick(${p.id})">🗑</button>
+            </div>
+          </div>
+        </div>`;
+      }
     }
+    html += `<div class="add-phrase-footer"><button onclick="openAddPhraseWithCat('${cat.id}')">➕ Adicionar frase em ${cat.name}</button></div>
+        </div>
+      </div>
+    </div>`;
+  }
+  container.innerHTML = html;
+}
 
-    function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
-    function escapeAttr(str) { return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+window.toggleSection = function(id){
+  if(openSections.has(id)) openSections.delete(id);
+  else openSections.add(id);
+  render();
+}
 
-    function addNewCard() {
-        const english = document.getElementById('englishPhrase').value.trim();
-        const portuguese = document.getElementById('portugueseTranslation').value.trim();
-        if (!english || !portuguese) {
-            alert('Por favor, preencha a frase em inglês e a tradução.');
-            return;
-        }
-        const newId = Date.now();
-        const newCard = new PhraseCard(newId, english, portuguese, null, null);
-        cardsArray.unshift(newCard);
-        saveToStorage();
-        renderCards();
-        document.getElementById('englishPhrase').value = '';
-        document.getElementById('portugueseTranslation').value = '';
-    }
+function escapeHtml(str){ return String(str).replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;});}
+function highlightText(text, query){ const escText = escapeHtml(text); const escQ = query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); return escText.replace(new RegExp(`(${escQ})`,'gi'),'<mark>$1</mark>'); }
 
-    document.getElementById('addCardBtn').addEventListener('click', addNewCard);
-    loadFromStorage();
-    renderCards();
+// Audio & download
+let currentUtterance = null;
+function speakPhrase(id){
+  const phrase = phrases.find(p=>p.id===id);
+  if(!phrase) return;
+  if(currentUtterance) window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(phrase.en);
+  utter.lang='en-US'; utter.rate=0.9;
+  window.speechSynthesis.speak(utter);
+  currentUtterance = utter;
+  showToast(`🔊 Speaking: ${phrase.en.substring(0,50)}`);
+}
+function downloadAudio(id){
+  const phrase = phrases.find(p=>p.id===id);
+  if(!phrase) return;
+  const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(phrase.en)}&tl=en&client=tw-ob`;
+  const a = document.createElement('a'); a.href=url; a.download = `phrase_${id}.mp3`; a.click();
+  showToast("⬇️ Download iniciado");
+}
+
+// modal phrase logic
+let currentEditId = null;
+function openAddPhraseWithCat(catId){
+  currentEditId = null;
+  document.getElementById('phraseModalTitle').innerText = "📝 Nova Frase";
+  document.getElementById('phraseEn').value = "";
+  document.getElementById('phrasePt').value = "";
+  document.getElementById('translatePreview').innerHTML = "🔮 Tradução automática...";
+  document.getElementById('editPhraseId').value = "";
+  document.getElementById('modalDeleteBtn').style.display = "none";
+  populateCatSelect(catId);
+  document.getElementById('phraseModal').classList.add('open');
+  document.getElementById('phraseEn').focus();
+  delete document.getElementById('phrasePt').dataset.manual;
+}
+
+function editPhrase(id){
+  const p = phrases.find(x=>x.id===id);
+  if(!p) return;
+  currentEditId = id;
+  document.getElementById('phraseModalTitle').innerText = "✏️ Editar Frase";
+  document.getElementById('phraseEn').value = p.en;
+  document.getElementById('phrasePt').value = p.pt;
+  document.getElementById('translatePreview').innerHTML = "";
+  document.getElementById('editPhraseId').value = id;
+  document.getElementById('modalDeleteBtn').style.display = "inline-flex";
+  populateCatSelect(p.cat);
+  document.getElementById('phraseModal').classList.add('open');
+  document.getElementById('phrasePt').dataset.manual = '1';
+}
+
+function populateCatSelect(selectedId){
+  const select = document.getElementById('phraseCat');
+  select.innerHTML = categories.map(c=>`<option value="${c.id}" ${c.id===selectedId ? 'selected' : ''}>${c.emoji} ${c.name}</option>`).join('');
+}
+
+async function savePhraseModal(){
+  const en = document.getElementById('phraseEn').value.trim();
+  const pt = document.getElementById('phrasePt').value.trim();
+  const cat = document.getElementById('phraseCat').value;
+  const editId = document.getElementById('editPhraseId').value;
+  if(!en){ showToast("⚠️ Frase em inglês obrigatória"); return; }
+  let finalPt = pt;
+  if(!finalPt){
+    finalPt = await autoTranslate(en);
+  }
+  if(editId){
+    const idx = phrases.findIndex(p=>p.id==editId);
+    if(idx!==-1) phrases[idx] = {...phrases[idx], en, pt:finalPt||pt, cat};
+  } else {
+    phrases.push({ id: nextId++, en, pt: finalPt || pt, cat });
+  }
+  persist(); render(); closeModals(); showToast(editId?"✅ atualizada":"✅ adicionada!");
+}
+
+function deletePhraseQuick(id){
+  if(confirm("Excluir esta frase?")){
+    phrases = phrases.filter(p=>p.id!==id);
+    persist(); render(); showToast("🗑 Removida");
+  }
+}
+function modalDeleteHandler(){
+  const id = document.getElementById('editPhraseId').value;
+  if(id && confirm("Remover permanentemente?")){
+    phrases = phrases.filter(p=>p.id!=id);
+    persist(); render(); closeModals(); showToast("🗑 Frase excluída");
+  }
+}
+
+// Category logic
+let selectedEmoji = "📁";
+function openCatModal(){
+  selectedEmoji = EMOJIS_LIST[0];
+  renderEmojiPicker();
+  document.getElementById('catName').value = "";
+  document.getElementById('catModal').classList.add('open');
+}
+function renderEmojiPicker(){
+  const grid = document.getElementById('emojiPickerGrid');
+  grid.innerHTML = EMOJIS_LIST.map(e => `<span class="emoji-option ${e===selectedEmoji ? 'selected':''}" onclick="selectEmoji('${e}')">${e}</span>`).join('');
+}
+window.selectEmoji = function(emoji){ selectedEmoji = emoji; renderEmojiPicker(); };
+function saveCategory(){
+  const name = document.getElementById('catName').value.trim();
+  if(!name){ showToast("Nome da categoria"); return; }
+  const id = name.toLowerCase().replace(/[^a-z0-9]/g,'-') + "-"+Date.now();
+  categories.push({ id, name, emoji: selectedEmoji });
+  openSections.add(id);
+  persist(); render(); closeModals(); showToast("📁 Categoria criada");
+}
+function deleteCategoryPrompt(id){
+  const cat = categories.find(c=>c.id===id);
+  const count = phrases.filter(p=>p.cat===id).length;
+  if(confirm(`Excluir "${cat?.name}" e suas ${count} frase(s)?`)){
+    categories = categories.filter(c=>c.id!==id);
+    phrases = phrases.filter(p=>p.cat!==id);
+    openSections.delete(id);
+    persist(); render(); showToast("🗑 Categoria removida");
+  }
+}
+
+// search, expand, collapse
+function handleSearch(){ currentSearch = document.getElementById('searchInput').value; render(); }
+function expandAll(){ categories.forEach(c=>openSections.add(c.id)); render(); }
+function collapseAll(){ openSections.clear(); render(); }
+
+function exportData(){
+  const data = JSON.stringify({categories, phrases},null,2);
+  const blob = new Blob([data],{type:'application/json'});
+  const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download="english_roleplay.json"; a.click(); showToast("📦 Exportado");
+}
+function importData(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try{
+      const json = JSON.parse(ev.target.result);
+      if(json.categories) categories = json.categories;
+      if(json.phrases) { json.phrases.forEach(p=>{ if(!phrases.find(x=>x.en===p.en)) phrases.push({...p, id:nextId++}); }); }
+      persist(); render(); showToast("✅ Importado");
+    }catch{ showToast("Arquivo inválido");}
+  };
+  reader.readAsText(file);
+}
+function showToast(msg){
+  const toast = document.getElementById('toastMsg');
+  toast.innerText = msg; toast.classList.add('show');
+  setTimeout(()=>toast.classList.remove('show'),2500);
+}
+function closeModals(){ document.querySelectorAll('.modal-overlay').forEach(m=>m.classList.remove('open')); }
+
+// init event listeners
+document.getElementById('searchInput').addEventListener('input', handleSearch);
+document.getElementById('expandAllBtn').addEventListener('click', expandAll);
+document.getElementById('collapseAllBtn').addEventListener('click', collapseAll);
+document.getElementById('exportBtn').addEventListener('click', exportData);
+document.getElementById('importFile').addEventListener('change', importData);
+document.getElementById('newCatBtn').addEventListener('click', openCatModal);
+document.getElementById('newPhraseTopBtn').addEventListener('click', ()=>openAddPhraseWithCat(categories[0]?.id||'general'));
+document.getElementById('closePhraseModal').addEventListener('click', closeModals);
+document.getElementById('modalCancelBtn').addEventListener('click', closeModals);
+document.getElementById('modalSaveBtn').addEventListener('click', savePhraseModal);
+document.getElementById('modalDeleteBtn').addEventListener('click', modalDeleteHandler);
+document.getElementById('closeCatModal').addEventListener('click', closeModals);
+document.getElementById('catCancelBtn').addEventListener('click', closeModals);
+document.getElementById('catSaveBtn').addEventListener('click', saveCategory);
+document.getElementById('phraseEn').addEventListener('input', triggerAutoTranslate);
+document.getElementById('phrasePt').addEventListener('input', function(){ this.dataset.manual='1'; });
+
+loadData();
+render();
 </script>
 </body>
 </html>
