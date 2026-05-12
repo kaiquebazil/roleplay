@@ -1,0 +1,819 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Phrases · Roleplay</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Lato:ital,wght@0,300;0,400;0,700;1,300&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f6f3;
+  --surface: #ffffff;
+  --border: #e3e2df;
+  --border2: #d0ceca;
+  --text: #1a1a1a;
+  --muted: #8a8a8a;
+  --muted2: #b0aca6;
+  --accent: #2383e2;
+  --accent-soft: #e8f1fb;
+  --green: #0f9b58;
+  --green-soft: #e6f6ee;
+  --red: #e03e3e;
+  --red-soft: #fce8e8;
+  --toggle-bg: #f1f0ee;
+  --radius: 6px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* TOP BAR */
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 32px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.topbar-left {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 700; font-size: 0.95rem; color: var(--text);
+}
+.topbar-right { display: flex; align-items: center; gap: 8px; }
+
+/* BUTTONS */
+.btn {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.82rem; font-weight: 700;
+  padding: 6px 14px; border-radius: var(--radius);
+  border: 1px solid var(--border2);
+  cursor: pointer; background: var(--surface); color: var(--text);
+  transition: background 0.12s; display: inline-flex;
+  align-items: center; gap: 5px;
+}
+.btn:hover { background: var(--toggle-bg); }
+.btn-blue { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-blue:hover { background: #1a6fc4; }
+.btn-sm { padding: 4px 10px; font-size: 0.78rem; }
+
+/* COVER */
+.page-cover {
+  width: 100%; height: 130px;
+  background: linear-gradient(120deg, #1a1a4e 0%, #2383e2 55%, #43e8b0 100%);
+}
+
+/* PAGE */
+.page { max-width: 860px; margin: 0 auto; padding: 40px 32px 80px; }
+
+.page-meta { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 8px; margin-top: 20px; }
+.page-emoji { font-size: 2.6rem; line-height: 1; }
+.page-title { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700; line-height: 1.2; }
+.page-desc { font-size: 0.86rem; color: var(--muted); margin-top: 2px; }
+
+/* SEARCH */
+.search-area {
+  margin: 22px 0 26px;
+  display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+}
+.search-box { position: relative; flex: 1; min-width: 180px; }
+.search-box input {
+  width: 100%; font-family: 'Lato', sans-serif; font-size: 0.9rem;
+  padding: 9px 14px 9px 36px;
+  border: 1px solid var(--border2); border-radius: var(--radius);
+  background: var(--surface); color: var(--text); outline: none;
+  transition: border-color 0.15s;
+}
+.search-box input:focus { border-color: var(--accent); }
+.search-box input::placeholder { color: var(--muted2); }
+.search-icon {
+  position: absolute; left: 11px; top: 50%;
+  transform: translateY(-50%); color: var(--muted2); font-size: 0.85rem; pointer-events: none;
+}
+
+/* SECTION */
+.section { margin-bottom: 2px; }
+
+.section-toggle {
+  display: flex; align-items: center;
+  padding: 4px 6px 4px 2px;
+  cursor: pointer; border-radius: var(--radius);
+  user-select: none; transition: background 0.1s;
+  position: relative;
+}
+.section-toggle:hover { background: var(--toggle-bg); }
+
+.toggle-arrow {
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); font-size: 0.62rem; flex-shrink: 0;
+  transition: transform 0.18s;
+}
+.section.open .toggle-arrow { transform: rotate(90deg); }
+
+.section-emoji { font-size: 0.95rem; margin-right: 7px; }
+.section-label { font-weight: 700; font-size: 0.93rem; color: var(--text); flex: 1; }
+.section-count { font-size: 0.73rem; color: var(--muted2); margin-right: 6px; }
+
+.section-add {
+  opacity: 0; font-size: 0.73rem; color: var(--accent);
+  padding: 2px 8px; border-radius: 4px;
+  border: 1px solid var(--accent); background: none;
+  cursor: pointer; font-family: 'Lato', sans-serif; font-weight: 700;
+  transition: background 0.1s, opacity 0.15s; margin-right: 2px;
+}
+.section-toggle:hover .section-add { opacity: 1; }
+.section-add:hover { background: var(--accent-soft); }
+
+.section-del {
+  opacity: 0; font-size: 0.73rem; color: var(--muted2);
+  padding: 2px 6px; border-radius: 4px;
+  border: none; background: none;
+  cursor: pointer; font-family: 'Lato', sans-serif;
+  transition: color 0.1s, opacity 0.15s;
+}
+.section-toggle:hover .section-del { opacity: 1; }
+.section-del:hover { color: var(--red); }
+
+/* SECTION BODY */
+.section-body { display: none; padding-left: 26px; margin: 0 0 8px; }
+.section.open .section-body { display: block; }
+
+/* TABLE */
+.phrase-table { width: 100%; border-collapse: collapse; }
+.phrase-table thead tr { border-bottom: 1px solid var(--border); }
+.phrase-table th {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted2); padding: 6px 10px; text-align: left;
+}
+.phrase-row { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+.phrase-row:hover { background: var(--toggle-bg); }
+.phrase-row:last-child { border-bottom: none; }
+.phrase-row td { padding: 9px 10px; vertical-align: middle; }
+.td-en { font-weight: 500; font-size: 0.92rem; color: var(--text); min-width: 200px; }
+.td-pt { font-size: 0.87rem; color: var(--muted); font-style: italic; min-width: 180px; }
+.td-actions { white-space: nowrap; text-align: right; width: 1px; }
+
+.row-actions {
+  display: flex; gap: 2px; align-items: center; justify-content: flex-end;
+  opacity: 0; transition: opacity 0.12s;
+}
+.phrase-row:hover .row-actions { opacity: 1; }
+
+.action-btn {
+  width: 28px; height: 28px; border-radius: 5px; border: none;
+  background: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.82rem; transition: background 0.12s; color: var(--muted);
+}
+.action-btn:hover { background: var(--border); color: var(--text); }
+.action-btn.play:hover { background: var(--green-soft); color: var(--green); }
+.action-btn.dl:hover { background: var(--accent-soft); color: var(--accent); }
+.action-btn.del:hover { background: var(--red-soft); color: var(--red); }
+
+/* ADD ROW BUTTON */
+.add-row-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 10px; border-radius: var(--radius);
+  border: none; background: none; cursor: pointer;
+  font-size: 0.84rem; color: var(--muted2);
+  font-family: 'Lato', sans-serif; transition: background 0.12s, color 0.12s; width: 100%;
+}
+.add-row-btn:hover { background: var(--toggle-bg); color: var(--accent); }
+
+/* EMPTY */
+.empty-cat { padding: 12px 10px; font-size: 0.84rem; color: var(--muted2); font-style: italic; }
+
+/* DIVIDER */
+.divider { height: 1px; background: var(--border); margin: 28px 0; }
+
+/* PLAYING */
+.phrase-row.playing .td-en { color: var(--green); }
+
+mark { background: #fff176; border-radius: 2px; padding: 0 1px; }
+
+/* MODAL */
+.overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.4); backdrop-filter: blur(2px);
+  z-index: 300; align-items: center; justify-content: center;
+}
+.overlay.open { display: flex; }
+.modal {
+  background: var(--surface); border-radius: 10px; padding: 28px;
+  width: 90%; max-width: 460px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+  animation: pop 0.18s ease;
+}
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.96) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+.modal-title {
+  font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700;
+  margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between;
+}
+.modal-close { background: none; border: none; font-size: 1rem; cursor: pointer; color: var(--muted); }
+.modal-close:hover { color: var(--text); }
+
+.form-row { margin-bottom: 14px; }
+label {
+  display: block; font-size: 0.74rem; font-weight: 700; color: var(--muted);
+  letter-spacing: 0.07em; text-transform: uppercase; margin-bottom: 5px;
+}
+.form-row input, .form-row select {
+  width: 100%; font-family: 'Lato', sans-serif; font-size: 0.9rem;
+  padding: 8px 12px; border: 1px solid var(--border2);
+  border-radius: var(--radius); background: var(--bg);
+  color: var(--text); outline: none; transition: border-color 0.15s;
+}
+.form-row input:focus { border-color: var(--accent); }
+
+.translate-preview {
+  margin-top: 5px; font-size: 0.8rem; color: var(--muted);
+  font-style: italic; min-height: 18px;
+}
+.translating { color: var(--accent) !important; font-style: normal !important; }
+
+.modal-footer { display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px; }
+
+/* EMOJI PICKER */
+.emoji-row { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 8px; }
+.emoji-opt {
+  font-size: 1.35rem; cursor: pointer; padding: 4px;
+  border-radius: 5px; border: 2px solid transparent; transition: all 0.1s;
+}
+.emoji-opt:hover { background: var(--toggle-bg); }
+.emoji-opt.selected { border-color: var(--accent); background: var(--accent-soft); }
+
+/* TOAST */
+.toast {
+  position: fixed; bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(60px);
+  background: #1a1a1a; color: #fff;
+  padding: 10px 20px; border-radius: 8px;
+  font-size: 0.85rem; font-weight: 500;
+  z-index: 999; opacity: 0; transition: all 0.25s; white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">🗣️ English Phrases · Roleplay Vida Real</div>
+  <div class="topbar-right">
+    <button class="btn btn-sm" onclick="exportData()">⬆ Exportar</button>
+    <label class="btn btn-sm" style="cursor:pointer">⬇ Importar<input type="file" accept=".json" onchange="importData(event)" style="display:none"></label>
+    <button class="btn btn-blue btn-sm" onclick="openAddModal(null)">+ Nova Frase</button>
+  </div>
+</div>
+
+<!-- COVER -->
+<div class="page-cover"></div>
+
+<!-- PAGE -->
+<div class="page">
+
+  <div class="page-meta">
+    <div class="page-emoji">🗣️</div>
+    <div>
+      <div class="page-title">Roleplay Vida Real</div>
+      <div class="page-desc">Frases em inglês por situação · 🔊 ouvir · ⬇️ baixar MP3 · tradução automática ao digitar</div>
+    </div>
+  </div>
+
+  <!-- Search + controls -->
+  <div class="search-area">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Buscar frases em inglês ou português…" oninput="handleSearch()">
+    </div>
+    <button class="btn btn-sm" onclick="expandAll()">Abrir tudo</button>
+    <button class="btn btn-sm" onclick="collapseAll()">Fechar tudo</button>
+  </div>
+
+  <!-- Categories -->
+  <div id="categoriesContainer"></div>
+
+  <div class="divider"></div>
+  <button class="btn" onclick="openCatModal()">＋ Nova Categoria</button>
+
+</div>
+
+<!-- MODAL: PHRASE -->
+<div class="overlay" id="phraseModal">
+  <div class="modal">
+    <div class="modal-title">
+      <span id="phraseModalTitle">Nova Frase</span>
+      <button class="modal-close" onclick="closeModal('phraseModal')">✕</button>
+    </div>
+    <div class="form-row">
+      <label>Frase em inglês ✱</label>
+      <input type="text" id="fEn" placeholder="ex: Can I get the check, please?" oninput="autoTranslateModal()">
+      <div class="translate-preview" id="translatePreview">Digite para ver a tradução automática…</div>
+    </div>
+    <div class="form-row">
+      <label>Tradução em português</label>
+      <input type="text" id="fPt" placeholder="Gerada automaticamente ou edite aqui">
+    </div>
+    <div class="form-row">
+      <label>Categoria</label>
+      <select id="fCat"></select>
+    </div>
+    <input type="hidden" id="fId">
+    <div class="modal-footer">
+      <button class="btn btn-sm" id="deletePhraseBtn" style="margin-right:auto;color:var(--red);border-color:var(--red);display:none" onclick="deletePhrase()">🗑 Excluir</button>
+      <button class="btn btn-sm" onclick="closeModal('phraseModal')">Cancelar</button>
+      <button class="btn btn-blue btn-sm" onclick="savePhrase()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: CATEGORY -->
+<div class="overlay" id="catModal">
+  <div class="modal">
+    <div class="modal-title">
+      Nova Categoria
+      <button class="modal-close" onclick="closeModal('catModal')">✕</button>
+    </div>
+    <div class="form-row">
+      <label>Nome da categoria ✱</label>
+      <input type="text" id="cName" placeholder="ex: No aeroporto">
+    </div>
+    <div class="form-row">
+      <label>Emoji</label>
+      <div class="emoji-row" id="emojiPicker"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-sm" onclick="closeModal('catModal')">Cancelar</button>
+      <button class="btn btn-blue btn-sm" onclick="saveCategory()">Criar</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── DATA ────────────────────────────────────────────────────────
+const EMOJIS = ['✈️','👋','🍽️','🛍️','💼','💬','🗺️','🏨','🏥','🚨','🚌','📚','🏠','😊','📱','🤝','🎉','🏋️','🌍','🎓','🏦','🎭','🏖️','🍕','🎵','💡','🧳','🔑','🌙','☀️'];
+
+const DEFAULT_CATS = [
+  { id:'greetings',   name:'Cumprimentos',      emoji:'👋' },
+  { id:'restaurant',  name:'Restaurante',        emoji:'🍽️' },
+  { id:'shopping',    name:'Compras',            emoji:'🛍️' },
+  { id:'work',        name:'Trabalho',           emoji:'💼' },
+  { id:'small-talk',  name:'Small Talk',         emoji:'💬' },
+  { id:'directions',  name:'Direções',           emoji:'🗺️' },
+  { id:'hotel',       name:'Hotel',              emoji:'🏨' },
+  { id:'health',      name:'Saúde',              emoji:'🏥' },
+  { id:'emergencies', name:'Emergências',        emoji:'🚨' },
+  { id:'transport',   name:'Transporte',         emoji:'🚌' },
+  { id:'school',      name:'Escola / Estudo',    emoji:'📚' },
+  { id:'home',        name:'Em Casa',            emoji:'🏠' },
+  { id:'feelings',    name:'Sentimentos',        emoji:'😊' },
+  { id:'phone',       name:'Telefone',           emoji:'📱' },
+  { id:'social',      name:'Encontros / Social', emoji:'🤝' },
+];
+
+const DEFAULT_PHRASES = [
+  {id:1,  en:"Good morning! How are you?",                           pt:"Bom dia! Como você está?",                                  cat:"greetings"},
+  {id:2,  en:"Nice to meet you!",                                     pt:"Prazer em te conhecer!",                                    cat:"greetings"},
+  {id:3,  en:"Long time no see!",                                     pt:"Quanto tempo sem te ver!",                                 cat:"greetings"},
+  {id:4,  en:"Take care!",                                            pt:"Se cuide!",                                                 cat:"greetings"},
+  {id:5,  en:"Have a great day!",                                     pt:"Tenha um ótimo dia!",                                      cat:"greetings"},
+  {id:6,  en:"What's up?",                                            pt:"E aí? Tudo bem?",                                          cat:"greetings"},
+  {id:7,  en:"See you later!",                                        pt:"Até mais!",                                                cat:"greetings"},
+  {id:8,  en:"I'm doing well, thanks!",                               pt:"Estou bem, obrigado!",                                     cat:"greetings"},
+  {id:9,  en:"Goodbye! Have a safe trip!",                            pt:"Tchau! Boa viagem!",                                       cat:"greetings"},
+
+  {id:10, en:"Can I get the check, please?",                          pt:"Pode trazer a conta, por favor?",                          cat:"restaurant"},
+  {id:11, en:"I'd like to make a reservation for two.",               pt:"Gostaria de fazer uma reserva para dois.",                 cat:"restaurant"},
+  {id:12, en:"What do you recommend?",                                pt:"O que você recomenda?",                                    cat:"restaurant"},
+  {id:13, en:"I'm allergic to nuts.",                                 pt:"Sou alérgico a nozes.",                                    cat:"restaurant"},
+  {id:14, en:"Could we have a table by the window?",                  pt:"Podemos ter uma mesa perto da janela?",                    cat:"restaurant"},
+  {id:15, en:"Is this dish spicy?",                                   pt:"Esse prato é picante?",                                    cat:"restaurant"},
+  {id:16, en:"I'll have the same, please.",                           pt:"Vou querer o mesmo, por favor.",                          cat:"restaurant"},
+  {id:17, en:"Can we split the bill?",                                pt:"Podemos dividir a conta?",                                 cat:"restaurant"},
+  {id:18, en:"The food was delicious!",                               pt:"A comida estava deliciosa!",                              cat:"restaurant"},
+  {id:19, en:"Could I have some more water, please?",                 pt:"Poderia trazer mais água, por favor?",                     cat:"restaurant"},
+
+  {id:20, en:"How much does this cost?",                              pt:"Quanto custa isso?",                                       cat:"shopping"},
+  {id:21, en:"Do you have this in a smaller size?",                   pt:"Você tem isso em um tamanho menor?",                      cat:"shopping"},
+  {id:22, en:"I'm just looking, thanks.",                             pt:"Estou só olhando, obrigado.",                             cat:"shopping"},
+  {id:23, en:"Can I try this on?",                                    pt:"Posso experimentar isso?",                                cat:"shopping"},
+  {id:24, en:"Do you accept credit cards?",                           pt:"Vocês aceitam cartão de crédito?",                        cat:"shopping"},
+  {id:25, en:"Is this on sale?",                                      pt:"Isso está em promoção?",                                  cat:"shopping"},
+  {id:26, en:"I'd like to return this.",                              pt:"Gostaria de devolver isso.",                              cat:"shopping"},
+  {id:27, en:"Do you have a loyalty card?",                           pt:"Vocês têm cartão fidelidade?",                            cat:"shopping"},
+
+  {id:30, en:"Can we schedule a meeting?",                            pt:"Podemos agendar uma reunião?",                            cat:"work"},
+  {id:31, en:"I'll send you the report by end of day.",               pt:"Vou te enviar o relatório até o fim do dia.",             cat:"work"},
+  {id:32, en:"Could you clarify that for me?",                        pt:"Você pode esclarecer isso para mim?",                     cat:"work"},
+  {id:33, en:"I'm working on it.",                                    pt:"Estou trabalhando nisso.",                                cat:"work"},
+  {id:34, en:"Let's touch base later.",                               pt:"Vamos nos falar mais tarde.",                             cat:"work"},
+  {id:35, en:"I'm out of the office today.",                          pt:"Estou fora do escritório hoje.",                          cat:"work"},
+  {id:36, en:"Can you cover for me?",                                 pt:"Você pode me cobrir?",                                   cat:"work"},
+
+  {id:40, en:"The weather is beautiful today, isn't it?",             pt:"O tempo está lindo hoje, não é?",                         cat:"small-talk"},
+  {id:41, en:"Did you watch the game last night?",                    pt:"Você assistiu ao jogo ontem à noite?",                    cat:"small-talk"},
+  {id:42, en:"I can't believe how fast time flies!",                  pt:"Não consigo acreditar como o tempo voa!",                 cat:"small-talk"},
+  {id:43, en:"Any plans for the weekend?",                            pt:"Algum plano para o fim de semana?",                       cat:"small-talk"},
+  {id:44, en:"I've been really busy lately.",                         pt:"Tenho estado muito ocupado ultimamente.",                 cat:"small-talk"},
+
+  {id:50, en:"Excuse me, where is the nearest subway station?",       pt:"Com licença, onde fica a estação de metrô mais próxima?", cat:"directions"},
+  {id:51, en:"How far is it from here?",                              pt:"Qual é a distância daqui?",                               cat:"directions"},
+  {id:52, en:"Turn left at the traffic light.",                       pt:"Vire à esquerda no semáforo.",                           cat:"directions"},
+  {id:53, en:"Can you show me on the map?",                           pt:"Você pode me mostrar no mapa?",                          cat:"directions"},
+  {id:54, en:"I think we're lost.",                                   pt:"Acho que estamos perdidos.",                             cat:"directions"},
+
+  {id:60, en:"I have a reservation under the name…",                 pt:"Tenho uma reserva no nome…",                              cat:"hotel"},
+  {id:61, en:"What time is check-out?",                               pt:"Qual é o horário de check-out?",                         cat:"hotel"},
+  {id:62, en:"The air conditioning isn't working.",                   pt:"O ar-condicionado não está funcionando.",                cat:"hotel"},
+  {id:63, en:"Can I have an extra pillow?",                           pt:"Posso ter um travesseiro extra?",                        cat:"hotel"},
+  {id:64, en:"Is breakfast included?",                                pt:"O café da manhã está incluído?",                         cat:"hotel"},
+
+  {id:70, en:"I don't feel well.",                                    pt:"Não estou me sentindo bem.",                             cat:"health"},
+  {id:71, en:"I have a headache.",                                    pt:"Estou com dor de cabeça.",                               cat:"health"},
+  {id:72, en:"I need to see a doctor.",                               pt:"Preciso consultar um médico.",                           cat:"health"},
+  {id:73, en:"Do you have anything for a sore throat?",              pt:"Você tem algo para dor de garganta?",                    cat:"health"},
+
+  {id:80, en:"Call the police!",                                      pt:"Chame a polícia!",                                       cat:"emergencies"},
+  {id:81, en:"I need an ambulance!",                                  pt:"Preciso de uma ambulância!",                             cat:"emergencies"},
+  {id:82, en:"Help! Someone stole my bag!",                           pt:"Ajuda! Alguém roubou minha bolsa!",                      cat:"emergencies"},
+  {id:83, en:"Is there a hospital nearby?",                           pt:"Há um hospital por perto?",                             cat:"emergencies"},
+
+  {id:90, en:"Where can I buy a ticket?",                             pt:"Onde posso comprar uma passagem?",                       cat:"transport"},
+  {id:91, en:"Does this bus go to downtown?",                         pt:"Este ônibus vai para o centro?",                        cat:"transport"},
+  {id:92, en:"How long is the ride?",                                 pt:"Quanto tempo dura a viagem?",                           cat:"transport"},
+  {id:93, en:"I'd like a window seat, please.",                       pt:"Gostaria de um assento na janela, por favor.",          cat:"transport"},
+
+  {id:100,en:"Could you repeat that, please?",                        pt:"Poderia repetir isso, por favor?",                       cat:"school"},
+  {id:101,en:"I don't understand. Could you explain it differently?", pt:"Não entendi. Poderia explicar de outra forma?",         cat:"school"},
+  {id:102,en:"When is the deadline?",                                  pt:"Qual é o prazo?",                                       cat:"school"},
+  {id:103,en:"Can I borrow your notes?",                              pt:"Posso pegar suas anotações emprestado?",                 cat:"school"},
+
+  {id:110,en:"Could you turn down the volume?",                       pt:"Você pode abaixar o volume?",                           cat:"home"},
+  {id:111,en:"It's your turn to do the dishes.",                      pt:"É sua vez de lavar a louça.",                           cat:"home"},
+  {id:112,en:"We're out of milk.",                                    pt:"Acabou o leite.",                                       cat:"home"},
+  {id:113,en:"Can you take out the trash?",                           pt:"Você pode jogar o lixo fora?",                          cat:"home"},
+
+  {id:120,en:"I'm so excited about this!",                            pt:"Estou muito animado com isso!",                         cat:"feelings"},
+  {id:121,en:"I'm a little nervous.",                                 pt:"Estou um pouco nervoso.",                               cat:"feelings"},
+  {id:122,en:"That really made my day!",                              pt:"Isso realmente fez meu dia!",                           cat:"feelings"},
+  {id:123,en:"I'm proud of you.",                                     pt:"Estou orgulhoso de você.",                              cat:"feelings"},
+
+  {id:130,en:"Can you hear me OK?",                                   pt:"Você consegue me ouvir bem?",                           cat:"phone"},
+  {id:131,en:"I'll call you back later.",                             pt:"Vou te ligar de volta mais tarde.",                     cat:"phone"},
+  {id:132,en:"Sorry, you're breaking up.",                            pt:"Desculpa, está caindo a ligação.",                      cat:"phone"},
+  {id:133,en:"Can I put you on hold for a second?",                   pt:"Posso colocar você em espera por um segundo?",          cat:"phone"},
+
+  {id:140,en:"Would you like to grab a coffee sometime?",             pt:"Gostaria de tomar um café algum dia?",                  cat:"social"},
+  {id:141,en:"Are you free this weekend?",                            pt:"Você está livre neste fim de semana?",                  cat:"social"},
+  {id:142,en:"I had a really good time.",                             pt:"Me diverti muito.",                                     cat:"social"},
+  {id:143,en:"Let's do this again soon!",                             pt:"Vamos repetir isso em breve!",                         cat:"social"},
+];
+
+// ── STATE ────────────────────────────────────────────────────────
+function loadState() {
+  return {
+    cats:    JSON.parse(localStorage.getItem('rp2_cats')    || 'null') || DEFAULT_CATS.map(c=>({...c})),
+    phrases: JSON.parse(localStorage.getItem('rp2_phrases') || 'null') || DEFAULT_PHRASES.map(p=>({...p})),
+  };
+}
+function persist() {
+  localStorage.setItem('rp2_cats',    JSON.stringify(state.cats));
+  localStorage.setItem('rp2_phrases', JSON.stringify(state.phrases));
+}
+
+let state = loadState();
+let openSections = new Set(state.cats.map(c => c.id));
+let nextId = state.phrases.reduce((m,p) => Math.max(m, p.id), 0) + 1;
+let selectedEmoji = EMOJIS[0];
+let translateTimer = null;
+let currentSearch = '';
+
+// ── RENDER ────────────────────────────────────────────────────────
+function render() {
+  const container = document.getElementById('categoriesContainer');
+  const q = currentSearch.toLowerCase().trim();
+  let html = '';
+
+  state.cats.forEach(cat => {
+    let catPhrases = state.phrases.filter(p => p.cat === cat.id);
+    const filtered = q
+      ? catPhrases.filter(p => p.en.toLowerCase().includes(q) || p.pt.toLowerCase().includes(q))
+      : catPhrases;
+
+    const isOpen = q ? filtered.length > 0 : openSections.has(cat.id);
+    const cls = isOpen ? 'open' : '';
+
+    html += `<div class="section ${cls}" id="sec-${cat.id}">
+      <div class="section-toggle" onclick="toggleSection('${cat.id}')">
+        <span class="toggle-arrow">▶</span>
+        <span class="section-emoji">${cat.emoji}</span>
+        <span class="section-label">${esc(cat.name)}</span>
+        <span class="section-count">${filtered.length} frase${filtered.length!==1?'s':''}</span>
+        <button class="section-add" onclick="event.stopPropagation();openAddModal('${cat.id}')">+ Adicionar</button>
+        <button class="section-del" onclick="event.stopPropagation();deleteCategory('${cat.id}')" title="Remover categoria">✕</button>
+      </div>
+      <div class="section-body">
+        <table class="phrase-table">
+          <thead><tr>
+            <th style="width:45%">Inglês</th>
+            <th style="width:45%">Português</th>
+            <th></th>
+          </tr></thead>
+          <tbody>`;
+
+    if (filtered.length === 0) {
+      html += `<tr><td colspan="3"><div class="empty-cat">Nenhuma frase — clique em "+ Adicionar" acima.</div></td></tr>`;
+    } else {
+      filtered.forEach(p => {
+        const enH = q ? hilite(p.en, q) : esc(p.en);
+        const ptH = q ? hilite(p.pt, q) : esc(p.pt);
+        html += `<tr class="phrase-row" id="row-${p.id}">
+          <td class="td-en">${enH}</td>
+          <td class="td-pt">${ptH}</td>
+          <td class="td-actions">
+            <div class="row-actions">
+              <button class="action-btn play" onclick="speak(${p.id})" title="Ouvir">🔊</button>
+              <button class="action-btn dl"   onclick="dlAudio(${p.id})" title="Baixar MP3">⬇️</button>
+              <button class="action-btn"      onclick="openEditModal(${p.id})" title="Editar">✏️</button>
+              <button class="action-btn del"  onclick="quickDel(${p.id})" title="Excluir">🗑</button>
+            </div>
+          </td>
+        </tr>`;
+      });
+    }
+
+    html += `</tbody></table>
+        <button class="add-row-btn" onclick="openAddModal('${cat.id}')">＋ Adicionar frase em ${cat.emoji} ${esc(cat.name)}</button>
+      </div>
+    </div>`;
+  });
+
+  container.innerHTML = html;
+}
+
+function toggleSection(id) {
+  openSections.has(id) ? openSections.delete(id) : openSections.add(id);
+  render();
+}
+function collapseAll() { openSections.clear(); render(); }
+function expandAll()   { state.cats.forEach(c => openSections.add(c.id)); render(); }
+
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function hilite(text, q) {
+  const s = esc(text);
+  const sq = esc(q).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  return s.replace(new RegExp(sq,'gi'), m => `<mark>${m}</mark>`);
+}
+
+// ── SEARCH ────────────────────────────────────────────────────────
+function handleSearch() {
+  currentSearch = document.getElementById('searchInput').value;
+  render();
+}
+
+// ── AUTO TRANSLATE ────────────────────────────────────────────────
+async function doTranslate(text) {
+  if (!text || text.trim().length < 3) return '';
+  try {
+    const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=pt&dt=t&q=${encodeURIComponent(text)}`;
+    const res  = await fetch(url);
+    const data = await res.json();
+    return data[0]?.map(x => x[0]).join('') || '';
+  } catch { return ''; }
+}
+
+function autoTranslateModal() {
+  clearTimeout(translateTimer);
+  const val = document.getElementById('fEn').value;
+  const prev = document.getElementById('translatePreview');
+
+  if (!val.trim()) {
+    prev.textContent = 'Digite para ver a tradução automática…';
+    prev.className = 'translate-preview';
+    return;
+  }
+
+  prev.textContent = 'Traduzindo…';
+  prev.className = 'translate-preview translating';
+
+  translateTimer = setTimeout(async () => {
+    const translated = await doTranslate(val);
+    prev.className = 'translate-preview';
+    if (translated) {
+      prev.textContent = `🇧🇷 ${translated}`;
+      const ptInput = document.getElementById('fPt');
+      if (!ptInput.dataset.manualEdit) ptInput.value = translated;
+    } else {
+      prev.textContent = '';
+    }
+  }, 500);
+}
+
+// ── PHRASE MODAL ──────────────────────────────────────────────────
+function openAddModal(catId) {
+  document.getElementById('phraseModalTitle').textContent = 'Nova Frase';
+  document.getElementById('fId').value = '';
+  document.getElementById('fEn').value = '';
+  document.getElementById('fPt').value = '';
+  document.getElementById('translatePreview').textContent = 'Digite para ver a tradução automática…';
+  document.getElementById('translatePreview').className = 'translate-preview';
+  document.getElementById('deletePhraseBtn').style.display = 'none';
+  delete document.getElementById('fPt').dataset.manualEdit;
+  populateCatSelect(catId);
+  document.getElementById('phraseModal').classList.add('open');
+  setTimeout(() => document.getElementById('fEn').focus(), 120);
+}
+
+function openEditModal(id) {
+  const p = state.phrases.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('phraseModalTitle').textContent = 'Editar Frase';
+  document.getElementById('fId').value = id;
+  document.getElementById('fEn').value = p.en;
+  document.getElementById('fPt').value = p.pt;
+  document.getElementById('translatePreview').textContent = '';
+  document.getElementById('deletePhraseBtn').style.display = 'inline-flex';
+  document.getElementById('fPt').dataset.manualEdit = '1';
+  populateCatSelect(p.cat);
+  document.getElementById('phraseModal').classList.add('open');
+}
+
+function populateCatSelect(selectedId) {
+  document.getElementById('fCat').innerHTML = state.cats.map(c =>
+    `<option value="${c.id}" ${c.id===selectedId?'selected':''}>${c.emoji} ${c.name}</option>`
+  ).join('');
+}
+
+function savePhrase() {
+  const en  = document.getElementById('fEn').value.trim();
+  const pt  = document.getElementById('fPt').value.trim();
+  const cat = document.getElementById('fCat').value;
+  const id  = document.getElementById('fId').value;
+  if (!en) { showToast('⚠️ Digite a frase em inglês.'); return; }
+
+  if (id) {
+    const idx = state.phrases.findIndex(p => p.id == id);
+    if (idx > -1) state.phrases[idx] = { id: parseInt(id), en, pt, cat };
+  } else {
+    state.phrases.push({ id: nextId++, en, pt, cat });
+  }
+  persist(); closeModal('phraseModal'); render();
+  showToast(id ? '✅ Frase atualizada!' : '✅ Frase adicionada!');
+}
+
+function deletePhrase() {
+  const id = document.getElementById('fId').value;
+  if (!id) return;
+  state.phrases = state.phrases.filter(p => p.id != id);
+  persist(); closeModal('phraseModal'); render();
+  showToast('🗑 Frase removida.');
+}
+
+function quickDel(id) {
+  if (!confirm('Remover esta frase?')) return;
+  state.phrases = state.phrases.filter(p => p.id !== id);
+  persist(); render(); showToast('🗑 Removida.');
+}
+
+// ── CATEGORY ──────────────────────────────────────────────────────
+function openCatModal() {
+  document.getElementById('cName').value = '';
+  selectedEmoji = EMOJIS[0];
+  renderEmojiPicker();
+  document.getElementById('catModal').classList.add('open');
+  setTimeout(() => document.getElementById('cName').focus(), 120);
+}
+
+function renderEmojiPicker() {
+  document.getElementById('emojiPicker').innerHTML = EMOJIS.map(e =>
+    `<span class="emoji-opt ${e===selectedEmoji?'selected':''}" onclick="pickEmoji('${e}')">${e}</span>`
+  ).join('');
+}
+
+function pickEmoji(e) { selectedEmoji = e; renderEmojiPicker(); }
+
+function saveCategory() {
+  const name = document.getElementById('cName').value.trim();
+  if (!name) { showToast('⚠️ Digite o nome.'); return; }
+  const id = name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'') + '-' + Date.now();
+  state.cats.push({ id, name, emoji: selectedEmoji });
+  openSections.add(id);
+  persist(); closeModal('catModal'); render();
+  showToast('✅ Categoria criada!');
+}
+
+function deleteCategory(id) {
+  const cat = state.cats.find(c => c.id === id);
+  const count = state.phrases.filter(p => p.cat === id).length;
+  const msg = count > 0
+    ? `Remover "${cat?.name}" e suas ${count} frase(s)?`
+    : `Remover categoria "${cat?.name}"?`;
+  if (!confirm(msg)) return;
+  state.cats    = state.cats.filter(c => c.id !== id);
+  state.phrases = state.phrases.filter(p => p.cat !== id);
+  openSections.delete(id);
+  persist(); render();
+  showToast('🗑 Categoria removida.');
+}
+
+// ── AUDIO ──────────────────────────────────────────────────────────
+function speak(id) {
+  const p = state.phrases.find(x => x.id === id);
+  if (!p) return;
+  window.speechSynthesis.cancel();
+  document.querySelectorAll('.phrase-row.playing').forEach(r => r.classList.remove('playing'));
+  const row = document.getElementById(`row-${id}`);
+  if (row) row.classList.add('playing');
+  const u = new SpeechSynthesisUtterance(p.en);
+  u.lang = 'en-US'; u.rate = 0.92;
+  u.onend = () => { if (row) row.classList.remove('playing'); };
+  window.speechSynthesis.speak(u);
+}
+
+function dlAudio(id) {
+  const p = state.phrases.find(x => x.id === id);
+  if (!p) return;
+  const enc = encodeURIComponent(p.en);
+  const url = `https://translate.google.com/translate_tts?ie=UTF-8&q=${enc}&tl=en-US&client=tw-ob`;
+  const a = document.createElement('a');
+  a.href = url; a.target = '_blank';
+  a.download = p.en.substring(0,40).replace(/[^a-z0-9 ]/gi,'_')+'.mp3';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  showToast('✅ Download iniciado!');
+}
+
+// ── IMPORT / EXPORT ───────────────────────────────────────────────
+function exportData() {
+  const blob = new Blob([JSON.stringify({categories:state.cats,phrases:state.phrases},null,2)],{type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'english-phrases.json'; a.click();
+  showToast('✅ Exportado!');
+}
+
+function importData(e) {
+  const file = e.target.files[0]; if (!file) return;
+  const r = new FileReader();
+  r.onload = ev => {
+    try {
+      const d = JSON.parse(ev.target.result);
+      let added = 0;
+      if (d.categories) d.categories.forEach(c => { if (!state.cats.find(x=>x.id===c.id)) state.cats.push(c); });
+      if (d.phrases) d.phrases.forEach(p => {
+        if (!state.phrases.find(x=>x.en===p.en)) { state.phrases.push({...p,id:nextId++}); added++; }
+      });
+      persist(); render();
+      showToast(`✅ ${added} frase(s) importada(s)!`);
+    } catch { showToast('⚠️ Arquivo inválido.'); }
+  };
+  r.readAsText(file); e.target.value='';
+}
+
+// ── UTILS ──────────────────────────────────────────────────────────
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+let toastTm;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTm);
+  toastTm = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+document.querySelectorAll('.overlay').forEach(o => o.addEventListener('click', e => {
+  if (e.target === o) o.classList.remove('open');
+}));
+
+document.getElementById('fPt').addEventListener('input', function() {
+  this.dataset.manualEdit = '1';
+});
+
+// ── INIT ──────────────────────────────────────────────────────────
+render();
+</script>
+</body>
+</html>
