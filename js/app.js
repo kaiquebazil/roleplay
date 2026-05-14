@@ -144,6 +144,108 @@ const DEFAULT_PHRASES = [
 {id:144, en:"I turn off my phone an hour before bed.", pt:"Desligo meu celular uma hora antes de dormir.", cat:"routine", subcat:"evening_night"},
 {id:145, en:"Good night, sleep well!", pt:"Boa noite, durma bem!", cat:"routine", subcat:"evening_night"},
 {id:146, en:"I need to fix my sleep schedule.", pt:"Preciso arrumar meu horário de sono.", cat:"routine", subcat:"evening_night"},
+// VOLUNTARIADO - WORK (voluntary)
+{id:150, en:"Connecting with people like you feels good for me.", pt:"Conectar-me com pessoas como você me faz bem.", cat:"work", subcat:"voluntary"},
+{id:151, en:"I'm talking less, because I usually talk a lot and take up too much time.", pt:"Estou falando menos, porque costumo falar muito e tomar muito tempo.", cat:"work", subcat:"voluntary"},
+{id:152, en:"I tend to talk too much. Sometimes I say things I shouldn't.", pt:"Eu costumo falar muito. Às vezes digo coisas que não deveria.", cat:"work", subcat:"voluntary"},
+{id:153, en:"When I was little, I tried doing a front flip and smacked my head on the pool edge. I've had a bump there ever since.", pt:"Quando eu era pequeno, tentei dar um mortal para a frente e bati a cabeça na borda da piscina. Desde então, tenho um caroço ali.", cat:"work", subcat:"voluntary"},
+{id:154, en:"I've had this bump on my head since I was a kid — tried doing a front flip and totally smashed it on the edge of the pool.", pt:"Eu tenho esse galo na cabeça desde criança — tentei fazer um mortal para a frente e bati tudo na borda da piscina.", cat:"work", subcat:"voluntary"},
+{id:155, en:"Man, I'm freaking out. I know how to speak. I can talk with friends, but here I'm frozen. I just can't open my mouth to talk.", pt:"Cara, estou surtando. Eu sei falar. Consigo conversar com amigos, mas aqui estou congelado. Simplesmente não consigo abrir a boca para falar.", cat:"work", subcat:"voluntary"},
+{id:156, en:"Damn, this saved my life and now I wanna save others too.", pt:"Droga, isso salvou minha vida e agora quero salvar outras também.", cat:"work", subcat:"voluntary"},
+{id:157, en:"If you say it fast, I will not understand you, man.", pt:"Se você falar rápido, não vou te entender, cara.", cat:"work", subcat:"voluntary"},
+{id:158, en:"Yes, but if you speak too fast, I won't understand you.", pt:"Sim, mas se você falar muito rápido, eu não vou te entender.", cat:"work", subcat:"voluntary"},
+{id:159, en:"Who knows?", pt:"Quem sabe?", cat:"work", subcat:"voluntary"},
+{id:160, en:"Bless you", pt:"Saúde", cat:"work", subcat:"voluntary"},
+{id:161, en:"I appreciate you", pt:"Agradeço a você / Eu te aprecio", cat:"work", subcat:"voluntary"},
+{id:162, en:"I charge", pt:"Eu cobro", cat:"work", subcat:"voluntary"},
+{id:163, en:"Bring it in", pt:"Chega mais / Vem cá", cat:"work", subcat:"voluntary"},
+{id:164, en:"Holy clap, I've never seen you guys here!", pt:"Caraca, nunca tinha visto vocês por aqui!", cat:"work", subcat:"voluntary"},
+{id:165, en:"First time here?", pt:"Primeira vez aqui?", cat:"work", subcat:"voluntary"},
+{id:166, en:"Are you liking it?", pt:"Vocês estão gostando?", cat:"work", subcat:"voluntary"},
+{id:167, en:"Do you speak a little Portuguese?", pt:"Você fala um pouco de português?", cat:"work", subcat:"voluntary"},
+{id:168, en:"How did you learn, man?", pt:"Como você aprendeu, cara?", cat:"work", subcat:"voluntary"},
+{id:169, en:"What do you recommend me to do here?", pt:"O que você me recomenda fazer aqui?", cat:"work", subcat:"voluntary"},
+{id:170, en:"It depends on what you wanna do!", pt:"Depende do que você quer fazer!", cat:"work", subcat:"voluntary"},
+{id:171, en:"What are you looking for?", pt:"O que você está procurando?", cat:"work", subcat:"voluntary"},
+{id:172, en:"Try harder", pt:"Tenta mais / Esforce-se mais", cat:"work", subcat:"voluntary"},
+{id:173, en:"May the best person win.", pt:"Que vença o melhor.", cat:"work", subcat:"voluntary"},
+// OXIGÊNIO MEDICINAL - WORK (oxygen)
+{id:200, en:"I deliver medical oxygen to patients at home, using a car or a motorcycle.", pt:"Eu entrego oxigênio medicinal para pacientes em casa, usando carro ou moto.", cat:"work", subcat:"oxygen"},
+{id:201, en:"My job helps people breathe better.", pt:"Meu trabalho ajuda as pessoas a respirarem melhor.", cat:"work", subcat:"oxygen"},
+{id:202, en:"I help people who need oxygen at home. It's my job, but also my mission.", pt:"Eu ajudo pessoas que precisam de oxigênio em casa. É meu trabalho, mas também minha missão.", cat:"work", subcat:"oxygen"},
+{id:203, en:"I deliver medical oxygen to patients at home, by motorcycle or car.", pt:"Eu entrego oxigênio medicinal para pacientes em casa, de moto ou carro.", cat:"work", subcat:"oxygen"},
+{id:204, en:"I work in home oxygen supply. I transport and deliver cylinders by bike and car.", pt:"Eu trabalho com fornecimento de oxigênio domiciliar. Transporto e entrego cilindros de bicicleta e carro.", cat:"work", subcat:"oxygen"},
+{id:205, en:"I help people who need oxygen at home. I drive a car or a motorcycle to deliver it.", pt:"Eu ajudo pessoas que precisam de oxigênio em casa. Dirijo carro ou moto para entregar.", cat:"work", subcat:"oxygen"},
+{id:206, en:"I work delivering medical oxygen and helping customers at a store.", pt:"Eu trabalho entregando oxigênio medicinal e ajudando clientes em uma loja.", cat:"work", subcat:"oxygen"},
+{id:207, en:"I usually start at 8 a.m. and go out with my friend Alex to make a few deliveries during the day.", pt:"Eu normalmente começo às 8 da manhã e saio com meu amigo Alex para fazer algumas entregas durante o dia.", cat:"work", subcat:"oxygen"},
+{id:208, en:"When I get home, I train calisthenics, take a shower, study English, and go to bed around 10.", pt:"Quando chego em casa, treino calistenia, tomo banho, estudo inglês e vou dormir por volta das 22h.", cat:"work", subcat:"oxygen"},
+// FACULDADE / SOFTWARE ENGINEERING - SCHOOL (college_ads)
+
+// ----- 1. PERGUNTAS GERAIS -----
+{id:300, en:"What do you study?", pt:"O que você estuda?", cat:"school", subcat:"college_ads"},
+{id:301, en:"How's college going?", pt:"Como está a faculdade?", cat:"school", subcat:"college_ads"},
+{id:302, en:"Tell me about your latest project.", pt:"Me fale sobre seu último projeto.", cat:"school", subcat:"college_ads"},
+{id:303, en:"Where do you study?", pt:"Onde você estuda?", cat:"school", subcat:"college_ads"},
+{id:304, en:"How long is your course?", pt:"Quanto tempo dura o seu curso?", cat:"school", subcat:"college_ads"},
+{id:305, en:"Are you in college or university?", pt:"Você está na faculdade ou universidade?", cat:"school", subcat:"college_ads"},
+{id:306, en:"Do you like your major?", pt:"Você gosta do seu curso?", cat:"school", subcat:"college_ads"},
+{id:307, en:"When did you start studying there?", pt:"Quando você começou a estudar lá?", cat:"school", subcat:"college_ads"},
+
+// ----- 2. MOTIVOS E ESCOLHAS -----
+{id:308, en:"Why did you choose that major?", pt:"Por que você escolheu esse curso?", cat:"school", subcat:"college_ads"},
+{id:309, en:"Was it your first choice or did you change your mind later?", pt:"Foi sua primeira escolha ou você mudou de ideia depois?", cat:"school", subcat:"college_ads"},
+{id:310, en:"Did someone inspire you to study that?", pt:"Alguém te inspirou a estudar isso?", cat:"school", subcat:"college_ads"},
+
+// ----- 3. AULAS E ROTINA -----
+{id:311, en:"What subjects are you taking this semester?", pt:"Quais matérias você está fazendo esse semestre?", cat:"school", subcat:"college_ads"},
+{id:312, en:"Do you have a lot of assignments?", pt:"Você tem muitos trabalhos?", cat:"school", subcat:"college_ads"},
+{id:313, en:"How are your teachers?", pt:"Como são seus professores?", cat:"school", subcat:"college_ads"},
+{id:314, en:"Do you study every day or just before exams?", pt:"Você estuda todo dia ou só antes das provas?", cat:"school", subcat:"college_ads"},
+{id:315, en:"Do you usually study alone or with friends?", pt:"Você normalmente estuda sozinho ou com amigos?", cat:"school", subcat:"college_ads"},
+
+// ----- 4. O QUE A PESSOA ACHA DO CURSO -----
+{id:316, en:"What do you like the most about your course?", pt:"O que você mais gosta no seu curso?", cat:"school", subcat:"college_ads"},
+{id:317, en:"What's the hardest part for you?", pt:"Qual é a parte mais difícil pra você?", cat:"school", subcat:"college_ads"},
+{id:318, en:"Do you ever feel like giving up?", pt:"Você já sentiu vontade de desistir?", cat:"school", subcat:"college_ads"},
+{id:319, en:"What keeps you motivated to study?", pt:"O que te mantém motivado pra estudar?", cat:"school", subcat:"college_ads"},
+
+// ----- 5. TRABALHOS E FUTURO -----
+{id:320, en:"Do you already work in your field?", pt:"Você já trabalha na sua área?", cat:"school", subcat:"college_ads"},
+{id:321, en:"Do you plan to work abroad after graduation?", pt:"Você planeja trabalhar no exterior depois de se formar?", cat:"school", subcat:"college_ads"},
+{id:322, en:"What kind of job would you like to have after college?", pt:"Que tipo de trabalho você gostaria de ter depois da faculdade?", cat:"school", subcat:"college_ads"},
+{id:323, en:"Do you think your degree will help you in real life?", pt:"Você acha que o seu diploma vai te ajudar na vida real?", cat:"school", subcat:"college_ads"},
+
+// ----- 6. RESPOSTAS - INFORMAÇÕES PESSOAIS -----
+{id:324, en:"I study Software Engineering.", pt:"Eu estudo Engenharia de Software.", cat:"school", subcat:"college_ads"},
+{id:325, en:"I'm in the third semester.", pt:"Estou no terceiro período.", cat:"school", subcat:"college_ads"},
+{id:326, en:"It's a four-year program.", pt:"É um curso de quatro anos.", cat:"school", subcat:"college_ads"},
+{id:327, en:"I study at USF (University of San Francisco).", pt:"Eu estudo na USF (Universidade de São Francisco).", cat:"school", subcat:"college_ads"},
+{id:328, en:"Right now I'm on vacation.", pt:"No momento estou de férias.", cat:"school", subcat:"college_ads"},
+
+// ----- 7. RESPOSTAS - POR QUE ESCOLHEU -----
+{id:329, en:"I've always liked technology and problem-solving.", pt:"Eu sempre gostei de tecnologia e de resolver problemas.", cat:"school", subcat:"college_ads"},
+{id:330, en:"I want to build things that make people's lives easier.", pt:"Quero criar coisas que tornem a vida das pessoas mais fácil.", cat:"school", subcat:"college_ads"},
+{id:331, en:"Software engineering connects creativity and logic — and I love that.", pt:"Engenharia de software conecta criatividade e lógica — e eu amo isso.", cat:"school", subcat:"college_ads"},
+
+// ----- 8. RESPOSTAS - MATÉRIAS E APRENDIZADO -----
+{id:332, en:"Right now we're learning the basics of programming and databases.", pt:"Atualmente estamos aprendendo o básico de programação e bancos de dados.", cat:"school", subcat:"college_ads"},
+{id:333, en:"I'm learning how to code in Python and Java.", pt:"Estou aprendendo a programar em Python e Java.", cat:"school", subcat:"college_ads"},
+{id:334, en:"We also study algorithms, logic, and system design.", pt:"Também estudamos algoritmos, lógica e design de sistemas.", cat:"school", subcat:"college_ads"},
+
+// ----- 9. RESPOSTAS - O QUE ACHA DO CURSO -----
+{id:335, en:"It's challenging, but I really enjoy it.", pt:"É desafiador, mas eu gosto muito.", cat:"school", subcat:"college_ads"},
+{id:336, en:"Sometimes it's hard, but I feel I'm growing a lot.", pt:"Às vezes é difícil, mas sinto que estou evoluindo muito.", cat:"school", subcat:"college_ads"},
+{id:337, en:"I like when I understand how things work behind the apps we use every day.", pt:"Gosto quando entendo como funcionam as coisas por trás dos apps que usamos todo dia.", cat:"school", subcat:"college_ads"},
+
+// ----- 10. RESPOSTAS - ROTINA DE ESTUDOS -----
+{id:338, en:"I usually study early in the morning before work.", pt:"Eu normalmente estudo cedo de manhã antes do trabalho.", cat:"school", subcat:"college_ads"},
+{id:339, en:"I like to review what I learned after class.", pt:"Gosto de revisar o que aprendi depois da aula.", cat:"school", subcat:"college_ads"},
+{id:340, en:"I also watch videos and do online courses to go deeper.", pt:"Também assisto a vídeos e faço cursos online pra me aprofundar.", cat:"school", subcat:"college_ads"},
+
+// ----- 11. RESPOSTAS - PLANOS PARA O FUTURO -----
+{id:341, en:"I want to become a great software engineer and maybe work abroad someday.", pt:"Quero me tornar um ótimo engenheiro de software e talvez trabalhar no exterior algum dia.", cat:"school", subcat:"college_ads"},
+{id:342, en:"I'd like to create my own projects or even start a company in the future.", pt:"Gostaria de criar meus próprios projetos ou até abrir uma empresa no futuro.", cat:"school", subcat:"college_ads"},
+{id:343, en:"I want to use technology to help people and make a difference.", pt:"Quero usar a tecnologia pra ajudar as pessoas e fazer a diferença.", cat:"school", subcat:"college_ads"},
 ];
 
 // Função para carregar dados do localStorage
