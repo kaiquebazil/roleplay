@@ -41,7 +41,6 @@ const DEFAULT_CATEGORIES = [
 // Frases padrão com as novas frases de Trends
 const DEFAULT_PHRASES = [
   {id:1, en:"I study Software Engineering in college.", pt:"Eu estudo engenharia de software na faculdade.", cat:"school", subcat:"college_ads"},
-  {id:2, en:"I'd like to do mine like that too.", pt:"Eu também gostaria de fazer o meu assim.", cat:"school", subcat:"college_ads"},
   {id:3, en:"Are you naked? For God's sake, I'm already tired of seeing dicks today.", pt:"Você está nu? Pelo amor de Deus, já estou cansado de ver pênis hoje.", cat:"personal", subcat:"lengths_speaking"},
   {id:4, en:"Man, why are you naked?", pt:"Por que você está pelado?", cat:"personal", subcat:"lengths_speaking"},
   {id:5, en:"In Brazil, my name is Kaiky, but abroad people call me Kaike, Kaique, Kike.", pt:"No Brasil, meu nome é Kaiky, mas fora me chamam de Kaike, Kaique, Kike.", cat:"personal", subcat:"about_me"},
@@ -57,7 +56,6 @@ const DEFAULT_PHRASES = [
   {id:15, en:"She was my teacher back then.", pt:"Ela era minha professora naquela época.", cat:"personal", subcat:"about_love"},
   {id:16, en:"We've been together for almost five years.", pt:"Estamos juntos há quase cinco anos.", cat:"personal", subcat:"about_love"},
   {id:17, en:"I'm in my third semester of Software Engineering.", pt:"Estou no terceiro semestre de Engenharia de Software.", cat:"school", subcat:"college_ads"},
-  {id:18, en:"Your hair is similar to mine.", pt:"Seu cabelo é parecido com o meu.", cat:"personal", subcat:"about_me"},
   {id:19, en:"I'm not an atheist, but I don't follow any religion.", pt:"Eu não sou ateu, mas não sigo religião.", cat:"personal", subcat:"about_me"},
   {id:20, en:"How did you get there?", pt:"Como você chegou aí?", cat:"personal", subcat:"about_me"},
   {id:21, en:"Where were you born?", pt:"Onde você nasceu?", cat:"personal", subcat:"about_me"},
@@ -66,18 +64,14 @@ const DEFAULT_PHRASES = [
   {id:24, en:"What brings you here?", pt:"O que te traz aqui?", cat:"personal", subcat:"about_me"},
   
   // NOVAS FRASES - TRENDS
-  {id:25, en:"in that case", pt:"nesse caso", cat:"personal", subcat:"about_me_trends"},
   {id:26, en:"beats me", pt:"sei lá", cat:"personal", subcat:"about_me_trends"},
-  {id:27, en:"then get on with it", pt:"então vamos logo com isso", cat:"personal", subcat:"about_me_trends"},
   {id:28, en:"messi is the shit", pt:"messi é o melhor", cat:"personal", subcat:"about_me_trends"},
   {id:29, en:"go crazy", pt:"manda ver / fique à vontade", cat:"personal", subcat:"about_me_trends"},
-  {id:30, en:"where the hell you been?", pt:"onde diabos você esteve?", cat:"personal", subcat:"about_me_trends"},
   {id:31, en:"believe it or not!", pt:"acredite se quiser!", cat:"personal", subcat:"about_me_trends"},
   {id:32, en:"be my guest", pt:"fique à vontade", cat:"personal", subcat:"about_me_trends"},
   {id:33, en:"FYI", pt:"para sua informação", cat:"personal", subcat:"about_me_trends"},
   {id:34, en:"not too shabby", pt:"nada mal", cat:"personal", subcat:"about_me_trends"},
   {id:35, en:"I'm game", pt:"eu topo / eu tô dentro", cat:"personal", subcat:"about_me_trends"},
-  {id:36, en:"first of all", pt:"primeiramente", cat:"personal", subcat:"about_me_trends"},
   {id:37, en:"I'm in a hurry", pt:"estou com pressa", cat:"personal", subcat:"about_me_trends"},
   {id:38, en:"BRB (be right back)", pt:"já volto", cat:"personal", subcat:"about_me_trends"},
   {id:39, en:"pretty please", pt:"porfavorzinho", cat:"personal", subcat:"about_me_trends"},
@@ -93,67 +87,25 @@ const DEFAULT_PHRASES = [
   {id:49, en:"I'm screwed up", pt:"cometi um erro / estou enrolado", cat:"personal", subcat:"about_me_trends"},
 
   // ROTINA - MANHÃ (morning)
-{id:100, en:"I usually wake up at 7 AM.", pt:"Eu normalmente acordo às 7 da manhã.", cat:"routine", subcat:"morning"},
-{id:101, en:"My alarm goes off at 6:30.", pt:"Meu despertador toca às 6:30.", cat:"routine", subcat:"morning"},
-{id:102, en:"I hit the snooze button twice.", pt:"Aperto a soneca duas vezes.", cat:"routine", subcat:"morning"},
-{id:103, en:"I get out of bed around 7.", pt:"Eu saio da cama por volta das 7.", cat:"routine", subcat:"morning"},
-{id:104, en:"I take a shower every morning.", pt:"Tomo banho toda manhã.", cat:"routine", subcat:"morning"},
-{id:105, en:"I brush my teeth and wash my face.", pt:"Escovo os dentes e lavo o rosto.", cat:"routine", subcat:"morning"},
-{id:106, en:"I have breakfast at 7:30.", pt:"Tomo café da manhã às 7:30.", cat:"routine", subcat:"morning"},
-{id:107, en:"I drink a cup of coffee to wake up.", pt:"Bebo uma xícara de café para despertar.", cat:"routine", subcat:"morning"},
 {id:108, en:"I get dressed for the day.", pt:"Me visto para o dia.", cat:"routine", subcat:"morning"},
 {id:109, en:"I pack my bag before leaving.", pt:"Arrumo minha mochila antes de sair.", cat:"routine", subcat:"morning"},
 {id:110, en:"I leave home at 8 AM.", pt:"Saio de casa às 8 da manhã.", cat:"routine", subcat:"morning"},
-{id:111, en:"I commute to work by bus.", pt:"Vou para o trabalho de ônibus.", cat:"routine", subcat:"morning"},
-{id:112, en:"I'm a morning person.", pt:"Sou uma pessoa matutina.", cat:"routine", subcat:"morning"},
-{id:113, en:"I can't function without coffee.", pt:"Não funciono sem café.", cat:"routine", subcat:"morning"},
 {id:114, en:"I like to exercise in the morning.", pt:"Gosto de me exercitar de manhã.", cat:"routine", subcat:"morning"},
 {id:115, en:"I check my messages as soon as I wake up.", pt:"Verifico minhas mensagens assim que acordo.", cat:"routine", subcat:"morning"},
 
-// ROTINA - TARDE (afternoon)
-{id:116, en:"I have lunch around noon.", pt:"Almoço por volta do meio-dia.", cat:"routine", subcat:"afternoon"},
-{id:117, en:"I take a short break after lunch.", pt:"Faço uma pausa curta após o almoço.", cat:"routine", subcat:"afternoon"},
-{id:118, en:"I go back to work at 1 PM.", pt:"Volto ao trabalho às 13h.", cat:"routine", subcat:"afternoon"},
-{id:119, en:"I have a meeting in the afternoon.", pt:"Tenho uma reunião à tarde.", cat:"routine", subcat:"afternoon"},
-{id:120, en:"I feel tired around 3 PM.", pt:"Me sinto cansado por volta das 15h.", cat:"routine", subcat:"afternoon"},
-{id:121, en:"I drink an afternoon coffee.", pt:"Bebo um café da tarde.", cat:"routine", subcat:"afternoon"},
-{id:122, en:"I run errands in the afternoon.", pt:"Faço compras/recados à tarde.", cat:"routine", subcat:"afternoon"},
-{id:123, en:"I study after work.", pt:"Estudo depois do trabalho.", cat:"routine", subcat:"afternoon"},
-{id:124, en:"I go to the gym in the late afternoon.", pt:"Vou à academia no fim da tarde.", cat:"routine", subcat:"afternoon"},
-{id:125, en:"I pick up my kids from school.", pt:"Busco meus filhos na escola.", cat:"routine", subcat:"afternoon"},
-{id:126, en:"The afternoon goes by quickly.", pt:"A tarde passa rápido.", cat:"routine", subcat:"afternoon"},
-{id:127, en:"I take a nap after lunch.", pt:"Tiro uma soneca após o almoço.", cat:"routine", subcat:"afternoon"},
-{id:128, en:"I'm most productive in the afternoon.", pt:"Sou mais produtivo à tarde.", cat:"routine", subcat:"afternoon"},
-{id:129, en:"I finish work at 6 PM.", pt:"Termino o trabalho às 18h.", cat:"routine", subcat:"afternoon"},
-
 // ROTINA - NOITE (evening_night)
 {id:130, en:"I get home around 7 PM.", pt:"Chego em casa por volta das 19h.", cat:"routine", subcat:"evening_night"},
-{id:131, en:"I cook dinner for my family.", pt:"Cozinho o jantar para minha família.", cat:"routine", subcat:"evening_night"},
 {id:132, en:"I have dinner at 8 PM.", pt:"Janto às 20h.", cat:"routine", subcat:"evening_night"},
-{id:133, en:"I watch TV after dinner.", pt:"Assisto TV depois do jantar.", cat:"routine", subcat:"evening_night"},
-{id:134, en:"I take a shower before bed.", pt:"Tomo banho antes de dormir.", cat:"routine", subcat:"evening_night"},
 {id:135, en:"I scroll through social media at night.", pt:"Fico nas redes sociais à noite.", cat:"routine", subcat:"evening_night"},
-{id:136, en:"I read a book before sleeping.", pt:"Leio um livro antes de dormir.", cat:"routine", subcat:"evening_night"},
-{id:137, en:"I set my alarm for tomorrow.", pt:"Coloco o despertador para amanhã.", cat:"routine", subcat:"evening_night"},
-{id:138, en:"I go to bed around 11 PM.", pt:"Vou para a cama por volta das 23h.", cat:"routine", subcat:"evening_night"},
-{id:139, en:"I have trouble falling asleep.", pt:"Tenho dificuldade para pegar no sono.", cat:"routine", subcat:"evening_night"},
-{id:140, en:"I'm a night owl.", pt:"Sou uma pessoa noturna.", cat:"routine", subcat:"evening_night"},
 {id:141, en:"I need at least 7 hours of sleep.", pt:"Preciso de pelo menos 7 horas de sono.", cat:"routine", subcat:"evening_night"},
 {id:142, en:"I plan my next day before sleeping.", pt:"Planejo meu próximo dia antes de dormir.", cat:"routine", subcat:"evening_night"},
 {id:143, en:"I relax and unwind at night.", pt:"Eu relaxo e descontraio à noite.", cat:"routine", subcat:"evening_night"},
 {id:144, en:"I turn off my phone an hour before bed.", pt:"Desligo meu celular uma hora antes de dormir.", cat:"routine", subcat:"evening_night"},
 {id:145, en:"Good night, sleep well!", pt:"Boa noite, durma bem!", cat:"routine", subcat:"evening_night"},
 {id:146, en:"I need to fix my sleep schedule.", pt:"Preciso arrumar meu horário de sono.", cat:"routine", subcat:"evening_night"},
+
 // VOLUNTARIADO - WORK (voluntary)
-{id:150, en:"Connecting with people like you feels good for me.", pt:"Conectar-me com pessoas como você me faz bem.", cat:"work", subcat:"voluntary"},
-{id:151, en:"I'm talking less, because I usually talk a lot and take up too much time.", pt:"Estou falando menos, porque costumo falar muito e tomar muito tempo.", cat:"work", subcat:"voluntary"},
-{id:152, en:"I tend to talk too much. Sometimes I say things I shouldn't.", pt:"Eu costumo falar muito. Às vezes digo coisas que não deveria.", cat:"work", subcat:"voluntary"},
-{id:153, en:"When I was little, I tried doing a front flip and smacked my head on the pool edge. I've had a bump there ever since.", pt:"Quando eu era pequeno, tentei dar um mortal para a frente e bati a cabeça na borda da piscina. Desde então, tenho um caroço ali.", cat:"work", subcat:"voluntary"},
-{id:154, en:"I've had this bump on my head since I was a kid — tried doing a front flip and totally smashed it on the edge of the pool.", pt:"Eu tenho esse galo na cabeça desde criança — tentei fazer um mortal para a frente e bati tudo na borda da piscina.", cat:"work", subcat:"voluntary"},
 {id:155, en:"Man, I'm freaking out. I know how to speak. I can talk with friends, but here I'm frozen. I just can't open my mouth to talk.", pt:"Cara, estou surtando. Eu sei falar. Consigo conversar com amigos, mas aqui estou congelado. Simplesmente não consigo abrir a boca para falar.", cat:"work", subcat:"voluntary"},
-{id:156, en:"Damn, this saved my life and now I wanna save others too.", pt:"Droga, isso salvou minha vida e agora quero salvar outras também.", cat:"work", subcat:"voluntary"},
-{id:157, en:"If you say it fast, I will not understand you, man.", pt:"Se você falar rápido, não vou te entender, cara.", cat:"work", subcat:"voluntary"},
-{id:158, en:"Yes, but if you speak too fast, I won't understand you.", pt:"Sim, mas se você falar muito rápido, eu não vou te entender.", cat:"work", subcat:"voluntary"},
 {id:159, en:"Who knows?", pt:"Quem sabe?", cat:"work", subcat:"voluntary"},
 {id:160, en:"Bless you", pt:"Saúde", cat:"work", subcat:"voluntary"},
 {id:161, en:"I appreciate you", pt:"Agradeço a você / Eu te aprecio", cat:"work", subcat:"voluntary"},
@@ -527,19 +479,17 @@ window.editSubcat = function(catId, subcatId) {
 }
 
 window.deleteSubcat = function(catId, subcatId) {
-  if(confirm("Remover esta subcategoria? Todas as frases dela ficarão sem subcategoria.")) {
-    const cat = categories.find(c => c.id === catId);
-    if(cat) {
-      cat.subcats = cat.subcats.filter(s => s.id !== subcatId);
-      phrases.forEach(p => {
-        if(p.cat === catId && p.subcat === subcatId) {
-          p.subcat = "";
-        }
-      });
-      persist();
-      render();
-      showToast("🗑 Subcategoria removida");
-    }
+  const cat = categories.find(c => c.id === catId);
+  if(cat) {
+    cat.subcats = cat.subcats.filter(s => s.id !== subcatId);
+    phrases.forEach(p => {
+      if(p.cat === catId && p.subcat === subcatId) {
+        p.subcat = "";
+      }
+    });
+    persist();
+    render();
+    showToast("🗑 Subcategoria removida");
   }
 }
 
@@ -573,7 +523,7 @@ function saveSubcat() {
 function deleteSubcatFromModal() {
   const catId = document.getElementById('subcatParentCat').value;
   const editId = document.getElementById('subcatEditId').value;
-  if(editId && confirm("Remover esta subcategoria?")) {
+  if(editId) {
     const cat = categories.find(c => c.id === catId);
     if(cat) {
       cat.subcats = cat.subcats.filter(s => s.id !== editId);
@@ -643,12 +593,10 @@ window.editPhrase = function(id) {
 }
 
 window.deletePhraseQuick = function(id) {
-  if(confirm("Excluir esta frase?")){
-    phrases = phrases.filter(p=>p.id!==id);
-    persist();
-    render();
-    showToast("🗑 Removida");
-  }
+  phrases = phrases.filter(p=>p.id!==id);
+  persist();
+  render();
+  showToast("🗑 Frase removida");
 }
 
 async function savePhraseModal() {
@@ -676,7 +624,7 @@ async function savePhraseModal() {
 
 function modalDeleteHandler() {
   const id = document.getElementById('editPhraseId').value;
-  if(id && confirm("Remover permanentemente?")){
+  if(id) {
     phrases = phrases.filter(p=>p.id!=id);
     persist(); 
     render(); 
@@ -719,15 +667,12 @@ function saveCategory() {
 
 window.deleteCategoryPrompt = function(id) {
   const cat = categories.find(c=>c.id===id);
-  const count = phrases.filter(p=>p.cat===id).length;
-  if(confirm(`Excluir "${cat?.name}" e suas ${count} frase(s)?`)){
-    categories = categories.filter(c=>c.id!==id);
-    phrases = phrases.filter(p=>p.cat!==id);
-    openSections.delete(id);
-    persist(); 
-    render(); 
-    showToast("🗑 Categoria removida");
-  }
+  categories = categories.filter(c=>c.id!==id);
+  phrases = phrases.filter(p=>p.cat!==id);
+  openSections.delete(id);
+  persist(); 
+  render(); 
+  showToast(`🗑 Categoria "${cat?.name}" removida`);
 }
 
 // Search and controls
@@ -745,6 +690,18 @@ function collapseAll() {
   openSections.clear(); 
   render(); 
 }
+
+// Função para limpar o localStorage
+// Função para limpar o localStorage - SEM ALERT
+function clearLocalStorage() {
+  localStorage.removeItem('rp_cats_v5');
+  localStorage.removeItem('rp_phrases_v5');
+  showToast("🗑️ Dados limpos! Recarregando...");
+  setTimeout(() => location.reload(), 1000);
+}
+
+// Event listener para o botão de limpar dados
+document.getElementById('clearStorageBtn')?.addEventListener('click', clearLocalStorage);
 
 function exportData() {
   const data = JSON.stringify({categories, phrases}, null, 2);
@@ -787,6 +744,7 @@ function closeModals() {
 document.getElementById('searchInput').addEventListener('input', handleSearch);
 document.getElementById('expandAllBtn').addEventListener('click', expandAll);
 document.getElementById('collapseAllBtn').addEventListener('click', collapseAll);
+document.getElementById('clearStorageBtn')?.addEventListener('click', clearLocalStorage);
 document.getElementById('exportBtn').addEventListener('click', exportData);
 document.getElementById('importFile').addEventListener('change', importData);
 document.getElementById('newCatBtn').addEventListener('click', openCatModal);
@@ -805,6 +763,14 @@ document.getElementById('subcatCancelBtn')?.addEventListener('click', closeModal
 document.getElementById('subcatSaveBtn')?.addEventListener('click', saveSubcat);
 document.getElementById('subcatDeleteBtn')?.addEventListener('click', deleteSubcatFromModal);
 document.getElementById('phraseCat')?.addEventListener('change', function() { updateSubcatSelect(this.value); });
+
+// Botão limpar dados - SEM ALERT
+document.getElementById('clearStorageBtn')?.addEventListener('click', () => {
+  localStorage.removeItem('rp_cats_v5');
+  localStorage.removeItem('rp_phrases_v5');
+  showToast("🗑️ Dados limpos! Recarregando...");
+  setTimeout(() => location.reload(), 1000);
+});
 
 // Inicialização
 loadData();

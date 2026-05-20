@@ -999,15 +999,14 @@ function editFromView() {
 }
 
 function deleteFromView() {
-  if(currentViewRoleplay && confirm(`Excluir "${currentViewRoleplay.data.title}" permanentemente?`)) {
-    const area = currentViewRoleplay.area;
-    const id = currentViewRoleplay.id;
-    roleplays[area] = roleplays[area].filter(r => r.id !== id);
-    persistRoleplays();
-    renderAll();
-    closeViewModal();
-    showToast("🗑️ Roleplay excluído!");
-  }
+  if(!currentViewRoleplay) return;
+  const area = currentViewRoleplay.area;
+  const id = currentViewRoleplay.id;
+  roleplays[area] = roleplays[area].filter(r => r.id !== id);
+  persistRoleplays();
+  renderAll();
+  closeViewModal();
+  showToast("🗑️ Roleplay excluído!");
 }
 
 // Modal de criação/edição
@@ -1197,13 +1196,9 @@ function importRoleplays(file) {
 }
 
 function clearAllRoleplays() {
-  if(confirm("⚠️ ATENÇÃO! Isso vai apagar TODOS os roleplays.\n\nDeseja continuar?")) {
-    if(confirm("Última chance! Tem certeza?")) {
-      localStorage.removeItem('rp_roleplays_v2');
-      loadRoleplays();
-      showToast("🗑️ Todos os roleplays foram resetados!");
-    }
-  }
+  localStorage.removeItem('rp_roleplays_v2');
+  loadRoleplays();
+  showToast("🗑️ Todos os roleplays foram resetados!");
 }
 
 // Event Listeners
